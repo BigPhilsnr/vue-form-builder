@@ -27,6 +27,13 @@
             </label>
         </div>
 
+         <div :class="styles.FORM.FORM_GROUP">
+            <label> Depends  on</label>
+            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.depends">
+        </div>
+
+        
+
         <div :class="styles.FORM.FORM_GROUP">
             <label>Field Placeholder (Optional)</label>
             <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.placeholderText">
@@ -50,6 +57,9 @@
         components: {SidebarToggleableContainer},
         props: {
             control: Object
+        },
+        created(){
+            this.control.depends = "philip"
         }
     }
 </script>

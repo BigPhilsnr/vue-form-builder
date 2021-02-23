@@ -2,6 +2,8 @@
     <div :class="[control.containerClass, 'control-view-wrapper', control.additionalContainerClass]">
         <div class="control-view" :class="{'active': isActive}">
             <!-- render the label -->
+              
+               
             <ControlLabel v-show="control.isShowLabel" :control="control" />
 
             <!-- render the exact field -->

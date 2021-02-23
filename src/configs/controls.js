@@ -2,12 +2,14 @@
  * Supported Controls in Vue-Form-Builder
  * @author Phat Tran
  */
-import {STYLES} from "@/configs/styles";
-import {HELPER} from "@/libraries/helper";
+import { STYLES } from "@/configs/styles";
+import { HELPER } from "@/libraries/helper";
 import {
-    DATE_PICKER_RETURN_TYPES, DATE_PICKER_START_DATES,
+    DATE_PICKER_RETURN_TYPES,
+    DATE_PICKER_START_DATES,
 
-    RADIO_CHECKBOX_POSITION, RADIO_CHECKBOX_STYLE,
+    RADIO_CHECKBOX_POSITION,
+    RADIO_CHECKBOX_STYLE,
 
     DROPDOWN_DATA_MODES,
 
@@ -102,7 +104,7 @@ const CONTROLS = {
             numberOfMonths: 1, // Number of Month(s) will be shown
             numberOfColumns: 1, // Number of Column(s) will be shown
             minDate: null, // min day (less => can't select)
-            maxDate: null,// max day (more => can't select),
+            maxDate: null, // max day (more => can't select),
 
             singleMode: true, // date or date-range
 
@@ -192,7 +194,7 @@ const CONTROLS = {
         name: "Label",
         description: "Simple label text show up in your Form",
         disableValue: true,
-        
+
         configData: {
             forAttribute: null, // `for` for any control? (except the Label)
 
@@ -271,7 +273,7 @@ const CONTROL_DEFAULT_DATA = {
 
     'placeholderText': '', // :placeholder
 
-    'containerClass': STYLES.COLUMNS.COL4,
+    'containerClass': STYLES.COLUMNS.COL6,
     'additionalContainerClass': '', // :class for the <div> outer container
 
     'additionalFieldClass': '', // :class for <input> <select> ...
