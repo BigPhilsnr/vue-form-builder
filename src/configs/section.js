@@ -2,11 +2,15 @@
  * Supported Section & Section Constants in Vue-Form-Builder
  * @author Phat Tran
  */
-import {HELPER} from "@/libraries/helper";
-import {ROW_TYPES} from "@/configs/row";
+import {
+    HELPER
+} from "@/libraries/helper";
+import {
+    ROW_TYPES
+} from "@/configs/row";
 
 import NormalSectionView from "@/views/builder/section-views/NormalSectionView";
-// import TableSectionView from "@/views/builder/section-views/TableSectionView";
+import TableSectionView from "@/views/builder/section-views/TableSectionView";
 import ToggleableSectionView from "@/views/builder/section-views/ToggleableSectionView";
 
 import RendererNormalSectionView from "@/views/renderer/section-views/NormalSectionView";
@@ -38,7 +42,7 @@ const SECTION_TYPES = {
     //     name: "Table Block",
     //     description: "Section block built from a table with 2 column",
     //     value: 'table',
-    //
+
     //     rowType: ROW_TYPES.tableRow,
     //     builderView: TableSectionView
     // },
