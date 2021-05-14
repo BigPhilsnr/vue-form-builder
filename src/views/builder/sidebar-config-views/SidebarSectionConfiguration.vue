@@ -46,10 +46,28 @@
     </div>
 
     <div :class="styles.FORM.FORM_GROUP">
+      <label>
+        Select Formula Controls </label>
+        <select
+          :class="controlFieldClass"
+          @input="updateValue($event.target.value)"
+        >
+          <option
+            v-for="optionObj in sectionConfiguration.controls"
+            :key="optionObj"
+            :value="optionObj"
+            v-text="optionObj"
+            :selected="value === optionObj"
+          ></option>
+        </select>
+     
+    </div>
+
+    <div :class="styles.FORM.FORM_GROUP">
       <label>Evaluation visibility</label>
       <textarea
         type="text"
-         placeholder="Write your formula here"
+        placeholder="Write your formula here"
         :class="styles.FORM.FORM_CONTROL"
         rows="6"
         v-model="sectionConfiguration.condition"
@@ -88,6 +106,12 @@ export default {
       this.sectionConfiguration,
       this.dataPackage
     );
+  },
+  methods: {
+    updateValue(val) {
+      const value = this.sectionConfiguration.condition + "  " + `[${val}] `;
+      this.$set(this.sectionConfiguration, "condition", value);
+    },
   },
 };
 </script>

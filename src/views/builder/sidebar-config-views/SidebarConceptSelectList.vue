@@ -82,7 +82,7 @@ export default {
       // create
       //   this.newControlData = createControlData(controlKey);
       const configuration = JSON.parse(controlKey.config);
-      configuration.uniqueId = "control-" + HELPER.getUUIDv4();
+      configuration.uniqueId =controlKey.name
       this.newControlData = configuration;
       this.save(true);
     },

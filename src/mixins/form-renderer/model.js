@@ -34,7 +34,6 @@ const MODEL = {
       deep: true,
       handler(val) {
         if (!val) return;
-
         this.$emit(EMIT_EVENT, this.valueContainer);
       },
     },
@@ -55,20 +54,20 @@ const MODEL = {
             section.controls.forEach((controlId) => {
               if (this.formData.controls[controlId].evaluatedVisibility) {
                 const controlObj = this.formData.controls[controlId];
-                controlObj.additionalContainerClass= 'hide-me'
-                console.log(controlObj)
+                controlObj.additionalContainerClass = "hide-me";
+                console.log(controlObj);
                 this.$set(this.formData.controls, controlId, controlObj);
               }
             });
-          }else{
+          } else {
             section.controls.forEach((controlId) => {
-                if (this.formData.controls[controlId].evaluatedVisibility) {
-                  const controlObj = this.formData.controls[controlId];
-                  controlObj.additionalContainerClass= ''
-                  console.log(controlObj)
-                  this.$set(this.formData.controls, controlId, controlObj);
-                }
-              });
+              if (this.formData.controls[controlId].evaluatedVisibility) {
+                const controlObj = this.formData.controls[controlId];
+                controlObj.additionalContainerClass = "";
+                console.log(controlObj);
+                this.$set(this.formData.controls, controlId, controlObj);
+              }
+            });
           }
         }
       });
@@ -119,7 +118,8 @@ const MODEL = {
 
     executeDependency(input, str) {
       let shouldBeHidden = false;
-      const matches = str.match(/\[\w*/g).map((item) => item + "]");
+      const matches = str.match(/\[\S*/g);
+      console.log("MATCHES", matches);
       let hasFailed = false;
 
       matches.forEach((match) => {
@@ -128,37 +128,42 @@ const MODEL = {
         if (!keyValue) {
           hasFailed = true;
         }
-        if(isNaN(keyValue)){
-            str = str.replace(match, `input['${key}']`);
-        }else{
-            str = str.replace(match, keyValue);
+        if (isNaN(keyValue)) {
+          str = str.replace(match, `input['${key}']`);
+        } else {
+          str = str.replace(match, keyValue);
         }
-      
       });
 
       if (!hasFailed) {
+        console.log(str);
         shouldBeHidden = eval(str);
       }
 
+      console.log(str);
       return shouldBeHidden;
     },
 
     executeFormalar(input, str, output) {
-      //  input = { he: 600, we: 700, bm: 0 };
       if (!str) {
         return input;
       }
-
-      const matches = str.match(/\[\w*/g).map((item) => item + "]");
+      let shouldBeHidden = false;
+      const matches = str.match(/\[\S*/g);
+      console.log("MATCHES", matches);
       let hasFailed = false;
 
       matches.forEach((match) => {
         const key = match.replace("[", "").replace("]", "");
-        const keyValue = input[`${key}`];
+        let keyValue = input[`${key}`];
         if (!keyValue) {
           hasFailed = true;
         }
-        str = str.replace(match, keyValue);
+        if (isNaN(keyValue)) {
+          str = str.replace(match, `input['${key}']`);
+        } else {
+          str = str.replace(match, keyValue);
+        }
       });
 
       if (!hasFailed) {

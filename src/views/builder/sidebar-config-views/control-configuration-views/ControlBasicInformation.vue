@@ -33,15 +33,7 @@
                 Evaluated Visibility
                 <input type="checkbox" v-model="control.evaluatedVisibility">
             </label>
-        </div>
-
-
-         <div :class="styles.FORM.FORM_GROUP">
-            <label> Depends  on</label>
-            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.depends">
-        </div>
-
-        
+        </div>        
 
         <div :class="styles.FORM.FORM_GROUP">
             <label>Field Placeholder (Optional)</label>
