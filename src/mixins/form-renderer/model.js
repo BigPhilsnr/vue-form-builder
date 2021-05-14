@@ -23,7 +23,8 @@ const MODEL = {
         if (typeof val !== "object") {
           return;
         }
-        const valx = this.executeFormalar(val);
+
+        const valx = this.executeAll(val);
         this.men(valx);
         // set value for fields
         Object.assign(this.valueContainer, valx);
@@ -40,10 +41,18 @@ const MODEL = {
   },
 
   methods: {
-    /**
-     * Create Value Container to Store the Data
-     */
 
+    executeAll(val) {
+      if (!this.formData.formConfig.formula.length) {
+        return val;
+      }
+    
+      this.formData.formConfig.formula.forEach((formula) =>{
+         val = this.executeFormalar(val, formula.formula, formula.output)
+      } );
+
+      return val;
+    },
     men(val) {
       const sectionIds = Object.keys(this.formData.sections);
       sectionIds.forEach((sectionId) => {
@@ -167,6 +176,7 @@ const MODEL = {
       });
 
       if (!hasFailed) {
+        console.log(str)
         input[output] = eval(str);
       }
 

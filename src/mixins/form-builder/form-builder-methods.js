@@ -42,6 +42,7 @@ const FORM_BUILDER_METHODS = {
       this.$set(this.formData.sections, sectionObject.uniqueId, sectionObject);
       this.doSortSection();
     },
+    
     addFormula(formula) {
       if (!formula) {
         return;

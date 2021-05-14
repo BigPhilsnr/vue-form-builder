@@ -47,26 +47,26 @@ export default {
     newControlData: null,
     searchQuery: null,
     apiList: [
-      [
-        "Female",
-        "Refers to female gender",
-        '{"uniqueId":"control-a4d0e350-b1cf-42ed-bfc4-957655457b0b","type":"text","name":"Female","label":"Female","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[],"rows":3}',
-      ],
-      [
-        "Firstname",
-        "The first name of a person",
-        '{"uniqueId":"control-8e6f1378-109c-48e2-8344-267e3a8c91d5","type":"input","name":"Firstname","label":"First name","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[]}',
-      ],
-      [
-        "DC-Gender-00005",
-        "The gender of a person normally referring to male or female",
-        '{"uniqueId":"control-7a1c4094-c552-4811-a1ef-a68f7632d9e1","type":"radio","name":"DC-Gender-00005","label":"Gender","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[],"displayMode":"line","position":"left","items":[{"text":"Male","value":"DC-Male-00003"},{"text":"Female","value":"Female"}]}',
-      ],
-      [
-        "Lastname",
-        "The lastname of a person as per identification documents",
-        '{"uniqueId":"control-8e6f1378-109c-48e2-8344-267e3a8c91d5","type":"input","name":"Lastname","label":"Lastname","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[]}',
-      ],
+      // [
+      //   "Female",
+      //   "Refers to female gender",
+      //   '{"uniqueId":"control-a4d0e350-b1cf-42ed-bfc4-957655457b0b","type":"text","name":"Female","label":"Female","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[],"rows":3}',
+      // ],
+      // [
+      //   "Firstname",
+      //   "The first name of a person",
+      //   '{"uniqueId":"control-8e6f1378-109c-48e2-8344-267e3a8c91d5","type":"input","name":"Firstname","label":"First name","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[]}',
+      // ],
+      // [
+      //   "DC-Gender-00005",
+      //   "The gender of a person normally referring to male or female",
+      //   '{"uniqueId":"control-7a1c4094-c552-4811-a1ef-a68f7632d9e1","type":"radio","name":"DC-Gender-00005","label":"Gender","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[],"displayMode":"line","position":"left","items":[{"text":"Male","value":"DC-Male-00003"},{"text":"Female","value":"Female"}]}',
+      // ],
+      // [
+      //   "Lastname",
+      //   "The lastname of a person as per identification documents",
+      //   '{"uniqueId":"control-8e6f1378-109c-48e2-8344-267e3a8c91d5","type":"input","name":"Lastname","label":"Lastname","isShowLabel":true,"placeholderText":"","containerClass":"col-md-6 md-layout-item md-size-50","additionalContainerClass":"","additionalFieldClass":"","additionalLabelClass":"","defaultValue":"","validations":[]}',
+      // ],
     ],
   }),
   computed: {
@@ -76,17 +76,32 @@ export default {
       });
     },
   },
-
+  watch: {
+    searchQuery: function(t) {
+      this.fetchConcepts(t);
+    },
+  },
   methods: {
     selectedControl(controlKey) {
       // create
       //   this.newControlData = createControlData(controlKey);
       const configuration = JSON.parse(controlKey.config);
-      configuration.uniqueId =controlKey.name
+      configuration.uniqueId = controlKey.name;
       this.newControlData = configuration;
       this.save(true);
     },
-    searchText(query) {},
+
+    fetchConcepts: function(t) {
+      var e = this;
+      frappe.call({
+        method: "clinical.api.forms.form_builder.concept_query",
+        args: { txt: t },
+        callback: function(t) {
+          var n = t.message;
+          e.apiList = n;
+        },
+      });
+    },
   },
 };
 </script>

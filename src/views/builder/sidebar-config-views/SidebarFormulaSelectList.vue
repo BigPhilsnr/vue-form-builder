@@ -46,12 +46,12 @@ export default {
     newControlData: null,
     searchQuery: null,
     apiList: [
-      [
-        "BMI formula",
-        "Calculate the BMI",
-        "DC-Height-00066 / (\u00a3DC-Weight-00067 * \u00a3DC-Weight-00067)",
-        "DC-BMI-00068",
-      ],
+      // [
+      //   "BMI formula",
+      //   "Calculate the BMI",
+      //   "[Lastname] / ([Firstname]  *  [Firstname] )",
+      //   "Female",
+      // ],
     ],
   }),
   computed: {
@@ -66,19 +66,27 @@ export default {
       });
     },
   },
+  watch: {
+    searchQuery: function(t) {
+      this.fetchConcepts(t);
+    },
+  },
 
   methods: {
     selectedControl(controlKey) {
-      // create
-     
       this.close();
-       this.$formEvent.$emit(
-        EVENT_CONSTANTS.BUILDER.FORMULA.ADD,
-        controlKey
-      );
+      this.$formEvent.$emit(EVENT_CONSTANTS.BUILDER.FORMULA.ADD, controlKey);
     },
-    searchText(query) {
-
+    fetchConcepts: function(t) {
+      var e = this;
+      frappe.call({
+        method: "clinical.api.forms.form_builder.concept_formula_query",
+        args: { txt: t },
+        callback: function(t) {
+          var n = t.message;
+          e.apiList = n;
+        },
+      });
     },
   },
 };
