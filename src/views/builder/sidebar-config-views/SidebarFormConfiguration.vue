@@ -46,6 +46,14 @@
                        v-model="formConfiguration.formMethod">
             </div>
 
+             <div :class="styles.FORM.FORM_GROUP">
+                <label>Evaluation</label>
+                <textarea type="text"
+                       :class="styles.FORM.FORM_CONTROL"
+                       rows="6"
+                       v-model="formConfiguration.dependency"/>
+            </div>
+
         </div>
 
         <div class="buttons">

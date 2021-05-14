@@ -7,7 +7,7 @@
 
         <div :class="styles.FORM.FORM_GROUP">
             <label>Name (Must be unique)</label>
-            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.name">
+            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.name" readonly>
         </div>
 
         <div :class="styles.FORM.FORM_GROUP">
@@ -26,6 +26,15 @@
                 <input type="checkbox" v-model="control.isShowLabel">
             </label>
         </div>
+
+        
+        <div :class="styles.FORM.FORM_GROUP">
+            <label>
+                Evaluated Visibility
+                <input type="checkbox" v-model="control.evaluatedVisibility">
+            </label>
+        </div>
+
 
          <div :class="styles.FORM.FORM_GROUP">
             <label> Depends  on</label>
@@ -59,7 +68,7 @@
             control: Object
         },
         created(){
-            this.control.depends = "philip"
+            this.control.depends = ""
         }
     }
 </script>

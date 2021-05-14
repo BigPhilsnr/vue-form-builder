@@ -24,8 +24,11 @@
     <!-- below all -->
     <AddSectionControl @addSectionNotify="addSection" />
 
+    <add-formula @addFormula="addFormula" />
+
     <!-- global stuff -->
     <GlobalSidebar :formData="formData" />
+
 
     <hr />
 
@@ -35,12 +38,12 @@
 
 <script>
 import AddSectionControl from "@/views/builder/add-controls/AddSectionControl";
-import AddFormular from "@/views/builder/add-controls/AddFormula";
 import { MAIN_CONSTANTS } from "@/configs";
 import SectionContainer from "@/views/builder/SectionContainer";
 import FormBuilderBusiness from "@/mixins/form-builder-mixins";
 import FormConfiguration from "@/views/builder/FormConfiguration";
 import GlobalSidebar from "@/views/builder/GlobalSidebar";
+import AddFormula from '../views/builder/add-controls/AddFormula.vue';
 
 export default {
   name: "FormBuilder",
@@ -49,7 +52,7 @@ export default {
     FormConfiguration,
     SectionContainer,
     AddSectionControl,
-    AddFormular,
+    AddFormula,
   },
   mixins: FormBuilderBusiness,
   data: () => ({

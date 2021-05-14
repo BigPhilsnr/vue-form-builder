@@ -9,6 +9,7 @@
             <a href="javascript:void(0)"
                :class="styles.LIST_GROUP.SINGLE_ITEM"
                v-for="(controlInfo, controlKey) in controlTypes"
+               :key="controlInfo"
                @click="selectedControl(controlKey)">
 
                 <p class="type-headline" v-text="controlInfo.name"></p>
@@ -51,6 +52,7 @@
 
                 // create
                 this.newControlData = createControlData(controlKey)
+                console.log(this.newControlData)
                 this.save(true)
             }
         }

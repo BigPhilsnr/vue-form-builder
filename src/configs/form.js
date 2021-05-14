@@ -7,7 +7,7 @@ const FORM_DEFAULT_DATA = {
     headline: "",
     subHeadline: "",
     isShowHeadline: false,
-
+    formula:[],
     // <form></form> tag ??
     renderFormTag: false,
     formActionURL: "",

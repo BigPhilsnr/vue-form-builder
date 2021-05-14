@@ -63,6 +63,7 @@ const SECTION_DEFAULT_DATA = {
     subHeadlineAdditionalClass: '',
 
     isShowHeadline: true,
+    condition:"",
 
     sortOrder: 0,
     type: '',

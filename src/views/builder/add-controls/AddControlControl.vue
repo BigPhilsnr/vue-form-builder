@@ -11,7 +11,7 @@
     import {STYLE_INJECTION_MIXIN} from "@/mixins/style-injection-mixin";
     import {EVENT_CONSTANTS} from "@/configs/events";
     import SidebarRenderer from "@/libraries/sidebar-renderer.class";
-    import SidebarControlSelectList from "@/views/builder/sidebar-config-views/SidebarControlSelectList";
+    import SidebarControlSelectList from "@/views/builder/sidebar-config-views/SidebarConceptSelectList";
 
     export default {
         name: "AddControlControl",

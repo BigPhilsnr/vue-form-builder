@@ -23,7 +23,9 @@ const EVENT_CONSTANTS = {
             UPDATE: "builder.row.update",
             DELETE: "builder.row.delete",
         },
-
+        FORMULA: {
+            ADD: "builder.formula.add",
+        },
         CONTROL: {
             CREATE: "builder.control.create",
 
