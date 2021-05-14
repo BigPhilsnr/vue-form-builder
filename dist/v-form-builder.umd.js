@@ -2593,148 +2593,6 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "28a5":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isRegExp = __webpack_require__("aae3");
-var anObject = __webpack_require__("cb7c");
-var speciesConstructor = __webpack_require__("ebd6");
-var advanceStringIndex = __webpack_require__("0390");
-var toLength = __webpack_require__("9def");
-var callRegExpExec = __webpack_require__("5f1b");
-var regexpExec = __webpack_require__("520a");
-var fails = __webpack_require__("79e5");
-var $min = Math.min;
-var $push = [].push;
-var $SPLIT = 'split';
-var LENGTH = 'length';
-var LAST_INDEX = 'lastIndex';
-var MAX_UINT32 = 0xffffffff;
-
-// babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
-var SUPPORTS_Y = !fails(function () { RegExp(MAX_UINT32, 'y'); });
-
-// @@split logic
-__webpack_require__("214f")('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
-  var internalSplit;
-  if (
-    'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
-    'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
-    'ab'[$SPLIT](/(?:ab)*/)[LENGTH] != 2 ||
-    '.'[$SPLIT](/(.?)(.?)/)[LENGTH] != 4 ||
-    '.'[$SPLIT](/()()/)[LENGTH] > 1 ||
-    ''[$SPLIT](/.?/)[LENGTH]
-  ) {
-    // based on es5-shim implementation, need to rework it
-    internalSplit = function (separator, limit) {
-      var string = String(this);
-      if (separator === undefined && limit === 0) return [];
-      // If `separator` is not a regex, use native split
-      if (!isRegExp(separator)) return $split.call(string, separator, limit);
-      var output = [];
-      var flags = (separator.ignoreCase ? 'i' : '') +
-                  (separator.multiline ? 'm' : '') +
-                  (separator.unicode ? 'u' : '') +
-                  (separator.sticky ? 'y' : '');
-      var lastLastIndex = 0;
-      var splitLimit = limit === undefined ? MAX_UINT32 : limit >>> 0;
-      // Make `global` and avoid `lastIndex` issues by working with a copy
-      var separatorCopy = new RegExp(separator.source, flags + 'g');
-      var match, lastIndex, lastLength;
-      while (match = regexpExec.call(separatorCopy, string)) {
-        lastIndex = separatorCopy[LAST_INDEX];
-        if (lastIndex > lastLastIndex) {
-          output.push(string.slice(lastLastIndex, match.index));
-          if (match[LENGTH] > 1 && match.index < string[LENGTH]) $push.apply(output, match.slice(1));
-          lastLength = match[0][LENGTH];
-          lastLastIndex = lastIndex;
-          if (output[LENGTH] >= splitLimit) break;
-        }
-        if (separatorCopy[LAST_INDEX] === match.index) separatorCopy[LAST_INDEX]++; // Avoid an infinite loop
-      }
-      if (lastLastIndex === string[LENGTH]) {
-        if (lastLength || !separatorCopy.test('')) output.push('');
-      } else output.push(string.slice(lastLastIndex));
-      return output[LENGTH] > splitLimit ? output.slice(0, splitLimit) : output;
-    };
-  // Chakra, V8
-  } else if ('0'[$SPLIT](undefined, 0)[LENGTH]) {
-    internalSplit = function (separator, limit) {
-      return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
-    };
-  } else {
-    internalSplit = $split;
-  }
-
-  return [
-    // `String.prototype.split` method
-    // https://tc39.github.io/ecma262/#sec-string.prototype.split
-    function split(separator, limit) {
-      var O = defined(this);
-      var splitter = separator == undefined ? undefined : separator[SPLIT];
-      return splitter !== undefined
-        ? splitter.call(separator, O, limit)
-        : internalSplit.call(String(O), separator, limit);
-    },
-    // `RegExp.prototype[@@split]` method
-    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@split
-    //
-    // NOTE: This cannot be properly polyfilled in engines that don't support
-    // the 'y' flag.
-    function (regexp, limit) {
-      var res = maybeCallNative(internalSplit, regexp, this, limit, internalSplit !== $split);
-      if (res.done) return res.value;
-
-      var rx = anObject(regexp);
-      var S = String(this);
-      var C = speciesConstructor(rx, RegExp);
-
-      var unicodeMatching = rx.unicode;
-      var flags = (rx.ignoreCase ? 'i' : '') +
-                  (rx.multiline ? 'm' : '') +
-                  (rx.unicode ? 'u' : '') +
-                  (SUPPORTS_Y ? 'y' : 'g');
-
-      // ^(? + rx + ) is needed, in combination with some S slicing, to
-      // simulate the 'y' flag.
-      var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
-      var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
-      if (lim === 0) return [];
-      if (S.length === 0) return callRegExpExec(splitter, S) === null ? [S] : [];
-      var p = 0;
-      var q = 0;
-      var A = [];
-      while (q < S.length) {
-        splitter.lastIndex = SUPPORTS_Y ? q : 0;
-        var z = callRegExpExec(splitter, SUPPORTS_Y ? S : S.slice(q));
-        var e;
-        if (
-          z === null ||
-          (e = $min(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
-        ) {
-          q = advanceStringIndex(S, q, unicodeMatching);
-        } else {
-          A.push(S.slice(p, q));
-          if (A.length === lim) return A;
-          for (var i = 1; i <= z.length - 1; i++) {
-            A.push(z[i]);
-            if (A.length === lim) return A;
-          }
-          q = p = e;
-        }
-      }
-      A.push(S.slice(p));
-      return A;
-    }
-  ];
-});
-
-
-/***/ }),
-
 /***/ "28fe":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3939,12 +3797,12 @@ exports.f = {}.propertyIsEnumerable;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MODEL; });
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a481");
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4917");
-/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("7f7f");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4917");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f7f");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a481");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("cadf");
 /* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("456d");
@@ -3991,7 +3849,8 @@ var MODEL = {
         }
 
         var valx = this.executeAll(val);
-        this.men(valx); // set value for fields
+        this.men(valx);
+        this.controlDepends(valx); // set value for fields
 
         Object.assign(this.valueContainer, valx);
       }
@@ -4031,7 +3890,7 @@ var MODEL = {
             section.controls.forEach(function (controlId) {
               if (_this2.formData.controls[controlId].evaluatedVisibility) {
                 var controlObj = _this2.formData.controls[controlId];
-                controlObj.additionalContainerClass = "hide-me";
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
                 console.log(controlObj);
 
                 _this2.$set(_this2.formData.controls, controlId, controlObj);
@@ -4041,7 +3900,7 @@ var MODEL = {
             section.controls.forEach(function (controlId) {
               if (_this2.formData.controls[controlId].evaluatedVisibility) {
                 var controlObj = _this2.formData.controls[controlId];
-                controlObj.additionalContainerClass = "";
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me", "");
                 console.log(controlObj);
 
                 _this2.$set(_this2.formData.controls, controlId, controlObj);
@@ -4051,13 +3910,39 @@ var MODEL = {
         }
       });
     },
-    createValueContainer: function createValueContainer() {
+    controlDepends: function controlDepends(val) {
       var _this3 = this;
+
+      var controlIds = Object.keys(this.formData.controls);
+      controlIds.forEach(function (controlId) {
+        var control = _this3.formData.controls[controlId];
+
+        if (control.hideCondition && control.hideCondition.length) {
+          var shouldBeHidden = _this3.executeDependency(val, control.hideCondition);
+
+          if (shouldBeHidden) {
+            var controlObj = _this3.formData.controls[controlId];
+            controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
+            console.log(controlObj);
+
+            _this3.$set(_this3.formData.controls, controlId, controlObj);
+          } else {
+            var _controlObj = _this3.formData.controls[controlId];
+            _controlObj.additionalContainerClass = _controlObj.additionalContainerClass.replace(" hide-me", "");
+            console.log(_controlObj);
+
+            _this3.$set(_this3.formData.controls, controlId, _controlObj);
+          }
+        }
+      });
+    },
+    createValueContainer: function createValueContainer() {
+      var _this4 = this;
 
       var containerObj = {};
       var controlIds = Object.keys(this.formData.controls);
       controlIds.forEach(function (controlId) {
-        var controlItem = _this3.formData.controls[controlId]; // if disableValue is provided, we don't need to solve more for the control
+        var controlItem = _this4.formData.controls[controlId]; // if disableValue is provided, we don't need to solve more for the control
 
         if (typeof _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].disableValue === "boolean" && _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].disableValue) {
           return;
@@ -4088,7 +3973,7 @@ var MODEL = {
     },
     executeDependency: function executeDependency(input, str) {
       var shouldBeHidden = false;
-      var matches = str.match(/\[\S*/g);
+      var matches = str.match(/\[[^\]]*]/g);
       console.log("MATCHES", matches);
       var hasFailed = false;
       matches.forEach(function (match) {
@@ -4120,7 +4005,7 @@ var MODEL = {
       }
 
       var shouldBeHidden = false;
-      var matches = str.match(/\[\S*/g);
+      var matches = str.match(/\[[^\]]*]/g);
       console.log("MATCHES", matches);
       var hasFailed = false;
       matches.forEach(function (match) {
@@ -5199,7 +5084,7 @@ var AddSectionControlvue_type_template_id_02d85b7e_staticRenderFns = []
 // EXTERNAL MODULE: ./src/configs/styles.js
 var styles = __webpack_require__("d60e");
 
-// EXTERNAL MODULE: ./src/configs/section.js + 94 modules
+// EXTERNAL MODULE: ./src/configs/section.js + 98 modules
 var section = __webpack_require__("dd3c");
 
 // EXTERNAL MODULE: ./src/mixins/style-injection-mixin.js
@@ -5888,7 +5773,6 @@ var FORM_BUILDER_EVENT_HANDLER = {
      * @afterHandled Emit an event to notify the deletion is complete
      */
     controlDeletion: function controlDeletion(parentId, controlId) {
-      alert(parentId + "===" + controlId);
       var type = this.formData.sections.hasOwnProperty(parentId) ? "section" : "row"; // FIRST: We delete the relationship in section/row
 
       if (type === "section") {
@@ -7196,31 +7080,9 @@ function _iterableToArrayLimit(arr, i) {
 
   return _arr;
 }
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__("e630");
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/unsupportedIterableToArray.js
-
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return from_default()(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableRest.js
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -7231,7 +7093,7 @@ function _nonIterableRest() {
 
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || Object(unsupportedIterableToArray["a" /* default */])(arr, i) || _nonIterableRest();
 }
 
 /***/ }),
@@ -8352,6 +8214,7 @@ var CONTROL_SPECIAL_CONFIG_MIXIN = {
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ CONTROLS; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ CONTROL_DEFAULT_DATA; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ STATIC_CONTROLS; });
 
 // UNUSED EXPORTS: createControlData
 
@@ -10678,14 +10541,63 @@ var CONTROL_DEFAULT_DATA = {
   'additionalLabelClass': '',
   // :class for the <label>
   'defaultValue': '',
-
-  /**
-   * Validation that applied to the control
-   * @var {ValidationRule[]} validations
-   */
-  'validations': [] // data of the others - coming up later
+  'validations': [],
+  'hideCondition': '' // data of the others - coming up later
 
 };
+var STATIC_CONTROLS = [//  {
+//       "uniqueId": "control-addaf56d-08f9-4c44-9969-f693b74c7760",
+//       "type": "button",
+//       "name": "",
+//       "label": "Button",
+//       "subLabel": "",
+//       "description":"Button",
+//       "isShowLabel": false,
+//       "placeholderText": "",
+//       "containerClass": "col-md-4",
+//       "additionalContainerClass": "",
+//       "additionalFieldClass": "",
+//       "additionalLabelClass": "",
+//       "defaultValue": "",
+//       "validations": [],
+//       "buttonClass": "btn btn-primary",
+//       "buttonType": "button",
+//       "emitEventCode": "",
+//       "emitEventData": "",
+//       "isRunValidation": false
+//     },
+{
+  "uniqueId": "control-7be0c01a-9b18-411f-9c9a-07eb5efec813",
+  "type": "emptyBlock",
+  "name": "",
+  "label": "Empty Block",
+  "description": "Horizontal Block for form spacing and detached titles ",
+  "subLabel": "",
+  "isShowLabel": false,
+  "placeholderText": "",
+  "containerClass": "col-md-12",
+  "additionalContainerClass": "",
+  "additionalFieldClass": "",
+  "additionalLabelClass": "",
+  "defaultValue": "",
+  "validations": []
+}, {
+  "uniqueId": "control-57f2738e-6f19-4721-b2a7-c973c41232fd",
+  "type": "textBlock",
+  "name": "",
+  "label": "Text Block",
+  "description": "Used to add additional information to the form",
+  "subLabel": "",
+  "isShowLabel": true,
+  "placeholderText": "",
+  "containerClass": "col-md-12",
+  "additionalContainerClass": "",
+  "additionalFieldClass": "",
+  "additionalLabelClass": "",
+  "defaultValue": "",
+  "validations": [],
+  "text": ""
+}];
 /**
  * Create new control data
  * @param controlKey
@@ -18052,7 +17964,7 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding *
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.sort.js
 var es6_array_sort = __webpack_require__("55dd");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js + 5 modules
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js + 3 modules
 var slicedToArray = __webpack_require__("768b");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.entries.js
@@ -18070,7 +17982,7 @@ var es6_object_keys = __webpack_require__("456d");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
 var es6_object_assign = __webpack_require__("f751");
 
-// EXTERNAL MODULE: ./src/configs/section.js + 94 modules
+// EXTERNAL MODULE: ./src/configs/section.js + 98 modules
 var section = __webpack_require__("dd3c");
 
 // EXTERNAL MODULE: ./src/configs/controls.js + 92 modules
@@ -19284,6 +19196,23 @@ exports.f = __webpack_require__("8e60") ? Object.defineProperty : function defin
 
 /***/ }),
 
+/***/ "db2a":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _arrayLikeToArray; });
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+/***/ }),
+
 /***/ "dbdb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19422,12 +19351,12 @@ var AddControlControlvue_type_template_id_6d1e2399_staticRenderFns = []
 // EXTERNAL MODULE: ./src/libraries/sidebar-renderer.class.js
 var sidebar_renderer_class = __webpack_require__("1ec8");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/SidebarConceptSelectList.vue?vue&type=template&id=5bdaa3a8&scoped=true&
-var SidebarConceptSelectListvue_type_template_id_5bdaa3a8_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidebar-form-configuration"},[_c('h5',[_vm._v("Select Concept")]),_c('div',[_c('div',{staticStyle:{"margin-bottom":"8px"}},[_c('div',{},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchQuery),expression:"searchQuery"}],staticClass:"form-control md-field",attrs:{"type":"text","placeholder":"Search...."},domProps:{"value":(_vm.searchQuery)},on:{"input":function($event){if($event.target.composing){ return; }_vm.searchQuery=$event.target.value}}})])])]),_c('div',{class:[_vm.styles.LIST_GROUP.CONTAINER]},_vm._l((_vm.controlList),function(control){return _c('a',{key:control.name,class:_vm.styles.LIST_GROUP.SINGLE_ITEM,attrs:{"href":"javascript:void(0)"},on:{"click":function($event){return _vm.selectedControl(control)}}},[_c('p',{staticClass:"type-headline",domProps:{"textContent":_vm._s(control.name)}}),_c('p',{staticClass:"type-desc",domProps:{"textContent":_vm._s(control.description)}})])}),0)])}
-var SidebarConceptSelectListvue_type_template_id_5bdaa3a8_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/SidebarConceptSelectList.vue?vue&type=template&id=778ee3b8&scoped=true&
+var SidebarConceptSelectListvue_type_template_id_778ee3b8_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidebar-form-configuration"},[_c('h5',[_vm._v("Select Concept")]),_c('div',[_c('div',{staticStyle:{"margin-bottom":"8px"}},[_c('div',{},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.searchQuery),expression:"searchQuery"}],staticClass:"form-control md-field",attrs:{"type":"text","placeholder":"Search...."},domProps:{"value":(_vm.searchQuery)},on:{"input":function($event){if($event.target.composing){ return; }_vm.searchQuery=$event.target.value}}})])])]),_c('div',{class:[_vm.styles.LIST_GROUP.CONTAINER]},_vm._l((_vm.controlList),function(control){return _c('a',{key:control.name,class:_vm.styles.LIST_GROUP.SINGLE_ITEM,attrs:{"href":"javascript:void(0)"},on:{"click":function($event){return _vm.selectedControl(control)}}},[_c('p',{staticClass:"type-headline",domProps:{"textContent":_vm._s(control.name || control.type )}}),_c('p',{staticClass:"type-desc",domProps:{"textContent":_vm._s(control.description)}})])}),0)])}
+var SidebarConceptSelectListvue_type_template_id_778ee3b8_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/views/builder/sidebar-config-views/SidebarConceptSelectList.vue?vue&type=template&id=5bdaa3a8&scoped=true&
+// CONCATENATED MODULE: ./src/views/builder/sidebar-config-views/SidebarConceptSelectList.vue?vue&type=template&id=778ee3b8&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__("bd86");
@@ -19435,6 +19364,53 @@ var defineProperty = __webpack_require__("bd86");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayLikeToArray.js
+var arrayLikeToArray = __webpack_require__("db2a");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) return Object(arrayLikeToArray["a" /* default */])(arr);
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol.js
+var symbol = __webpack_require__("67bb");
+var symbol_default = /*#__PURE__*/__webpack_require__.n(symbol);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js
+var iterator = __webpack_require__("5d58");
+var iterator_default = /*#__PURE__*/__webpack_require__.n(iterator);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+
+function _iterableToArray(iter) {
+  if (typeof symbol_default.a !== "undefined" && iter[iterator_default.a] != null || iter["@@iterator"] != null) return from_default()(iter);
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__("e630");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || Object(unsupportedIterableToArray["a" /* default */])(arr) || _nonIterableSpread();
+}
 // EXTERNAL MODULE: ./src/configs/controls.js + 92 modules
 var controls = __webpack_require__("8dbe");
 
@@ -19442,6 +19418,7 @@ var controls = __webpack_require__("8dbe");
 var sidebar_body_mixin = __webpack_require__("cbce");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/SidebarConceptSelectList.vue?vue&type=script&lang=js&
+
 
 
 
@@ -19520,13 +19497,14 @@ var _name$mixins$computed;
   }
 }, Object(defineProperty["a" /* default */])(_name$mixins$computed, "computed", {
   controlList: function controlList() {
-    return this.apiList.map(function (item) {
+    var list = this.apiList.map(function (item) {
       return {
         name: item[0],
         description: item[1],
         config: item[2]
       };
     });
+    return [].concat(_toConsumableArray(list), _toConsumableArray(controls["c" /* STATIC_CONTROLS */]));
   }
 }), Object(defineProperty["a" /* default */])(_name$mixins$computed, "watch", {
   searchQuery: function searchQuery(t) {
@@ -19536,10 +19514,16 @@ var _name$mixins$computed;
   selectedControl: function selectedControl(controlKey) {
     // create
     //   this.newControlData = createControlData(controlKey);
-    var configuration = JSON.parse(controlKey.config);
-    configuration.uniqueId = controlKey.name;
-    this.newControlData = configuration;
-    this.save(true);
+    if (controlKey.config) {
+      var configuration = JSON.parse(controlKey.config);
+      configuration.uniqueId = controlKey.name;
+      this.newControlData = configuration;
+      this.save(true);
+    } else {
+      controlKey.uniqueId = "control-" + helper["a" /* HELPER */].getUUIDv4();
+      this.newControlData = controlKey;
+      this.save(true);
+    }
   },
   fetchConcepts: function fetchConcepts(t) {
     var e = this;
@@ -19567,11 +19551,11 @@ var _name$mixins$computed;
 
 var SidebarConceptSelectList_component = Object(componentNormalizer["a" /* default */])(
   sidebar_config_views_SidebarConceptSelectListvue_type_script_lang_js_,
-  SidebarConceptSelectListvue_type_template_id_5bdaa3a8_scoped_true_render,
-  SidebarConceptSelectListvue_type_template_id_5bdaa3a8_scoped_true_staticRenderFns,
+  SidebarConceptSelectListvue_type_template_id_778ee3b8_scoped_true_render,
+  SidebarConceptSelectListvue_type_template_id_778ee3b8_scoped_true_staticRenderFns,
   false,
   null,
-  "5bdaa3a8",
+  "778ee3b8",
   null
   
 )
@@ -19926,14 +19910,21 @@ var SidebarToggleableContainer_component = Object(componentNormalizer["a" /* def
 )
 
 /* harmony default export */ var SidebarToggleableContainer = (SidebarToggleableContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/control-configuration-views/ControlBasicInformation.vue?vue&type=template&id=73c3ea16&scoped=true&
-var ControlBasicInformationvue_type_template_id_73c3ea16_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('SidebarToggleableContainer',{attrs:{"headline":"Basic Detail"}},[_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Unique ID")]),_c('input',{class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text","readonly":""},domProps:{"value":_vm.control.uniqueId}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Name (Must be unique)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.name),expression:"control.name"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text","readonly":""},domProps:{"value":(_vm.control.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "name", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Label")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.label),expression:"control.label"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.label)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "label", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Sub-label")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.subLabel),expression:"control.subLabel"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.subLabel)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "subLabel", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v(" Show Label? "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.isShowLabel),expression:"control.isShowLabel"}],attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.control.isShowLabel)?_vm._i(_vm.control.isShowLabel,null)>-1:(_vm.control.isShowLabel)},on:{"change":function($event){var $$a=_vm.control.isShowLabel,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.control, "isShowLabel", $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.control, "isShowLabel", $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.control, "isShowLabel", $$c)}}}})])]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v(" Evaluated Visibility "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.evaluatedVisibility),expression:"control.evaluatedVisibility"}],attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.control.evaluatedVisibility)?_vm._i(_vm.control.evaluatedVisibility,null)>-1:(_vm.control.evaluatedVisibility)},on:{"change":function($event){var $$a=_vm.control.evaluatedVisibility,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.control, "evaluatedVisibility", $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.control, "evaluatedVisibility", $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.control, "evaluatedVisibility", $$c)}}}})])]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Field Placeholder (Optional)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.placeholderText),expression:"control.placeholderText"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.placeholderText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "placeholderText", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Default Value (Optional)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.defaultValue),expression:"control.defaultValue"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.defaultValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "defaultValue", $event.target.value)}}})])])}
-var ControlBasicInformationvue_type_template_id_73c3ea16_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/control-configuration-views/ControlBasicInformation.vue?vue&type=template&id=1756e50c&scoped=true&
+var ControlBasicInformationvue_type_template_id_1756e50c_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('SidebarToggleableContainer',{attrs:{"headline":"Basic Detail"}},[_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Unique ID")]),_c('input',{class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text","readonly":""},domProps:{"value":_vm.control.uniqueId}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Name (Must be unique)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.name),expression:"control.name"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text","readonly":""},domProps:{"value":(_vm.control.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "name", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Label")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.label),expression:"control.label"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.label)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "label", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Sub-label")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.subLabel),expression:"control.subLabel"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.subLabel)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "subLabel", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v(" Show Label? "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.isShowLabel),expression:"control.isShowLabel"}],attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.control.isShowLabel)?_vm._i(_vm.control.isShowLabel,null)>-1:(_vm.control.isShowLabel)},on:{"change":function($event){var $$a=_vm.control.isShowLabel,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.control, "isShowLabel", $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.control, "isShowLabel", $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.control, "isShowLabel", $$c)}}}})])]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v(" Evaluated Visibility "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.evaluatedVisibility),expression:"control.evaluatedVisibility"}],attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.control.evaluatedVisibility)?_vm._i(_vm.control.evaluatedVisibility,null)>-1:(_vm.control.evaluatedVisibility)},on:{"change":function($event){var $$a=_vm.control.evaluatedVisibility,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.control, "evaluatedVisibility", $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.control, "evaluatedVisibility", $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.control, "evaluatedVisibility", $$c)}}}})])]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Hide condition")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.hideCondition),expression:"control.hideCondition"}],class:_vm.styles.FORM.FORM_CONTROL,domProps:{"value":(_vm.control.hideCondition)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "hideCondition", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Field Placeholder (Optional)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.placeholderText),expression:"control.placeholderText"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.placeholderText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "placeholderText", $event.target.value)}}})]),_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Default Value (Optional)")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.defaultValue),expression:"control.defaultValue"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text"},domProps:{"value":(_vm.control.defaultValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "defaultValue", $event.target.value)}}})])])}
+var ControlBasicInformationvue_type_template_id_1756e50c_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/views/builder/sidebar-config-views/control-configuration-views/ControlBasicInformation.vue?vue&type=template&id=73c3ea16&scoped=true&
+// CONCATENATED MODULE: ./src/views/builder/sidebar-config-views/control-configuration-views/ControlBasicInformation.vue?vue&type=template&id=1756e50c&scoped=true&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/control-configuration-views/ControlBasicInformation.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20011,11 +20002,11 @@ var ControlBasicInformationvue_type_template_id_73c3ea16_scoped_true_staticRende
 
 var ControlBasicInformation_component = Object(componentNormalizer["a" /* default */])(
   control_configuration_views_ControlBasicInformationvue_type_script_lang_js_,
-  ControlBasicInformationvue_type_template_id_73c3ea16_scoped_true_render,
-  ControlBasicInformationvue_type_template_id_73c3ea16_scoped_true_staticRenderFns,
+  ControlBasicInformationvue_type_template_id_1756e50c_scoped_true_render,
+  ControlBasicInformationvue_type_template_id_1756e50c_scoped_true_staticRenderFns,
   false,
   null,
-  "73c3ea16",
+  "1756e50c",
   null
   
 )
@@ -20962,23 +20953,17 @@ var NormalSectionViewvue_type_template_id_fea399ce_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/views/renderer/section-views/NormalSectionView.vue?vue&type=template&id=fea399ce&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/renderer/ControlView.vue?vue&type=template&id=3b9ef8f9&
-var ControlViewvue_type_template_id_3b9ef8f9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.control.name == 'name' || _vm.valueContainer[_vm.lookUpField] == _vm.lookUpValue)?_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5b3f6952-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/renderer/ControlView.vue?vue&type=template&id=a672bf5c&
+var ControlViewvue_type_template_id_a672bf5c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.control.name == 'name' || _vm.valueContainer[_vm.lookUpField] == _vm.lookUpValue)?_c('div',{class:[
     _vm.control.containerClass,
     'control-view-wrapper',
     _vm.control.additionalContainerClass ]},[_c('div',{staticClass:"control-view"},[_c('ControlLabel',{directives:[{name:"show",rawName:"v-show",value:(_vm.control.isShowLabel),expression:"control.isShowLabel"}],attrs:{"control":_vm.control}}),_c(_vm.controlComponent,{tag:"component",class:_vm.validationErrorClasses,attrs:{"control":_vm.control,"value-container":_vm.valueContainer},model:{value:(_vm.valueContainer[_vm.controlName]),callback:function ($$v) {_vm.$set(_vm.valueContainer, _vm.controlName, $$v)},expression:"valueContainer[controlName]"}}),(_vm.hasValidationError)?_vm._l((_vm.validationErrorMessages),function(mess,i){return _c('div',{key:i,class:_vm.styles.FORM.ERROR_MESSAGE,domProps:{"textContent":_vm._s(mess)}})}):_vm._e()],2)]):_vm._e()}
-var ControlViewvue_type_template_id_3b9ef8f9_staticRenderFns = []
+var ControlViewvue_type_template_id_a672bf5c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/views/renderer/ControlView.vue?vue&type=template&id=3b9ef8f9&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
+// CONCATENATED MODULE: ./src/views/renderer/ControlView.vue?vue&type=template&id=a672bf5c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/renderer/ControlView.vue?vue&type=script&lang=js&
-
-
-
 
 //
 //
@@ -21053,21 +21038,6 @@ var es6_regexp_split = __webpack_require__("28a5");
       lookUpValue: null
     };
   },
-  created: function created() {
-    if (true) {
-      //   this.control.depends = "name=philip";
-      if (this.control.depends) {
-        if (this.control.depends.includes("=")) {
-          var result = this.control.depends.split("=");
-          this.lookUpField = result[0];
-          this.lookUpValue = result[1]; //   const currentFieldValue = this.valueContainer[lookUpField];
-          //   this.isVisible = currentFieldValue === lookUpvalue;
-        } else {
-          this.lookUpValue = 'default';
-        }
-      }
-    }
-  },
   computed: {
     /**
      * This accessor will get the component object to let us inject the right control
@@ -21109,13 +21079,6 @@ var es6_regexp_split = __webpack_require__("28a5");
       classes[this.styles.FORM.ERROR_OUTLINE] = this.hasValidationError;
       return classes;
     }
-  },
-  watch: {
-    valueContainer: function valueContainer(n, o) {
-      console.log(n);
-      console.log(o);
-      this.control.depends = "name=philip3";
-    }
   }
 });
 // CONCATENATED MODULE: ./src/views/renderer/ControlView.vue?vue&type=script&lang=js&
@@ -21130,8 +21093,8 @@ var es6_regexp_split = __webpack_require__("28a5");
 
 var renderer_ControlView_component = Object(componentNormalizer["a" /* default */])(
   views_renderer_ControlViewvue_type_script_lang_js_,
-  ControlViewvue_type_template_id_3b9ef8f9_render,
-  ControlViewvue_type_template_id_3b9ef8f9_staticRenderFns,
+  ControlViewvue_type_template_id_a672bf5c_render,
+  ControlViewvue_type_template_id_a672bf5c_staticRenderFns,
   false,
   null,
   null,
@@ -21821,6 +21784,27 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
+
+/***/ }),
+
+/***/ "e630":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _unsupportedIterableToArray; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("774e");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("db2a");
+
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return Object(_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Object(_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(o, minLen);
+}
 
 /***/ }),
 
@@ -23201,7 +23185,7 @@ var es6_object_keys = __webpack_require__("456d");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js + 5 modules
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js + 3 modules
 var slicedToArray = __webpack_require__("768b");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
@@ -23671,7 +23655,7 @@ var SectionContainervue_type_template_id_f0fac5a2_scoped_true_staticRenderFns = 
 
 // CONCATENATED MODULE: ./src/views/renderer/SectionContainer.vue?vue&type=template&id=f0fac5a2&scoped=true&
 
-// EXTERNAL MODULE: ./src/configs/section.js + 94 modules
+// EXTERNAL MODULE: ./src/configs/section.js + 98 modules
 var section = __webpack_require__("dd3c");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/renderer/SectionContainer.vue?vue&type=script&lang=js&

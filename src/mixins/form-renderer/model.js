@@ -26,6 +26,7 @@ const MODEL = {
 
         const valx = this.executeAll(val);
         this.men(valx);
+        this.controlDepends(valx)
         // set value for fields
         Object.assign(this.valueContainer, valx);
       },
@@ -63,7 +64,7 @@ const MODEL = {
             section.controls.forEach((controlId) => {
               if (this.formData.controls[controlId].evaluatedVisibility) {
                 const controlObj = this.formData.controls[controlId];
-                controlObj.additionalContainerClass = "hide-me";
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass+" hide-me";
                 console.log(controlObj);
                 this.$set(this.formData.controls, controlId, controlObj);
               }
@@ -72,14 +73,37 @@ const MODEL = {
             section.controls.forEach((controlId) => {
               if (this.formData.controls[controlId].evaluatedVisibility) {
                 const controlObj = this.formData.controls[controlId];
-                controlObj.additionalContainerClass = "";
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me","");
                 console.log(controlObj);
                 this.$set(this.formData.controls, controlId, controlObj);
               }
             });
           }
         }
+      }); 
+    },
+    controlDepends(val) {
+      const controlIds = Object.keys(this.formData.controls);
+      controlIds.forEach((controlId) => {
+        const control = this.formData.controls[controlId];
+        if (control.hideCondition && control.hideCondition.length) {
+          const shouldBeHidden = this.executeDependency(val, control.hideCondition);
+          if (shouldBeHidden) {       
+              const controlObj = this.formData.controls[controlId];
+              controlObj.additionalContainerClass = controlObj.additionalContainerClass+" hide-me";
+              console.log(controlObj);
+              this.$set(this.formData.controls, controlId, controlObj);
+
+          } else {
+            const controlObj = this.formData.controls[controlId];
+            controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me","");
+            console.log(controlObj);
+            this.$set(this.formData.controls, controlId, controlObj);
+          }
+        }
       });
+
+      
     },
     createValueContainer() {
       let containerObj = {};
@@ -127,7 +151,7 @@ const MODEL = {
 
     executeDependency(input, str) {
       let shouldBeHidden = false;
-      const matches = str.match(/\[\S*/g);
+      const matches = str.match(/\[[^\]]*]/g);
       console.log("MATCHES", matches);
       let hasFailed = false;
 
@@ -158,7 +182,7 @@ const MODEL = {
         return input;
       }
       let shouldBeHidden = false;
-      const matches = str.match(/\[\S*/g);
+      const matches = str.match(/\[[^\]]*]/g);
       console.log("MATCHES", matches);
       let hasFailed = false;
 

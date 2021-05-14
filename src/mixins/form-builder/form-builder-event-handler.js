@@ -159,7 +159,7 @@ const FORM_BUILDER_EVENT_HANDLER = {
      * @afterHandled Emit an event to notify the deletion is complete
      */
     controlDeletion(parentId, controlId) {
-        alert(parentId+"==="+controlId)
+  
       let type = this.formData.sections.hasOwnProperty(parentId)
         ? "section"
         : "row";

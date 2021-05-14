@@ -22,7 +22,7 @@
         :key="control.name"
         @click="selectedControl(control)"
       >
-        <p class="type-headline" v-text="control.name"></p>
+        <p class="type-headline" v-text="control.name || control.type "></p>
         <p class="type-desc" v-text="control.description"></p>
       </a>
     </div>
@@ -31,7 +31,7 @@
 
 <script>
 import { STYLE_INJECTION_MIXIN } from "@/mixins/style-injection-mixin";
-import { CONTROLS, createControlData } from "@/configs/controls";
+import { CONTROLS, STATIC_CONTROLS } from "@/configs/controls";
 import { SIDEBAR_BODY_MIXIN } from "@/mixins/sidebar-body-mixin";
 import { HELPER } from "@/libraries/helper";
 
@@ -71,9 +71,10 @@ export default {
   }),
   computed: {
     controlList() {
-      return this.apiList.map((item) => {
+      const list= this.apiList.map((item) => {
         return { name: item[0], description: item[1], config: item[2] };
       });
+      return[...list, ...STATIC_CONTROLS]
     },
   },
   watch: {
@@ -85,10 +86,19 @@ export default {
     selectedControl(controlKey) {
       // create
       //   this.newControlData = createControlData(controlKey);
-      const configuration = JSON.parse(controlKey.config);
+      if(controlKey.config){
+         const configuration = JSON.parse(controlKey.config);
       configuration.uniqueId = controlKey.name;
+      
       this.newControlData = configuration;
       this.save(true);
+      }else{
+        controlKey.uniqueId = "control-" + HELPER.getUUIDv4();
+      this.newControlData = controlKey;
+      this.save(true);
+
+      }
+     
     },
 
     fetchConcepts: function(t) {

@@ -280,15 +280,69 @@ const CONTROL_DEFAULT_DATA = {
     'additionalLabelClass': '', // :class for the <label>
 
     'defaultValue': '',
-
-    /**
-     * Validation that applied to the control
-     * @var {ValidationRule[]} validations
-     */
     'validations': [],
+    'hideCondition':''
 
     // data of the others - coming up later
 };
+
+
+const STATIC_CONTROLS = [
+//  {
+//       "uniqueId": "control-addaf56d-08f9-4c44-9969-f693b74c7760",
+//       "type": "button",
+//       "name": "",
+//       "label": "Button",
+//       "subLabel": "",
+//       "description":"Button",
+//       "isShowLabel": false,
+//       "placeholderText": "",
+//       "containerClass": "col-md-4",
+//       "additionalContainerClass": "",
+//       "additionalFieldClass": "",
+//       "additionalLabelClass": "",
+//       "defaultValue": "",
+//       "validations": [],
+//       "buttonClass": "btn btn-primary",
+//       "buttonType": "button",
+//       "emitEventCode": "",
+//       "emitEventData": "",
+//       "isRunValidation": false
+//     },
+  {
+      "uniqueId": "control-7be0c01a-9b18-411f-9c9a-07eb5efec813",
+      "type": "emptyBlock",
+      "name": "",
+      "label": "Empty Block",
+      "description":"Horizontal Block for form spacing and detached titles ",
+      "subLabel": "",
+      "isShowLabel": false,
+      "placeholderText": "",
+      "containerClass": "col-md-12",
+      "additionalContainerClass": "",
+      "additionalFieldClass": "",
+      "additionalLabelClass": "",
+      "defaultValue": "",
+      "validations": []
+    },
+    {
+      "uniqueId": "control-57f2738e-6f19-4721-b2a7-c973c41232fd",
+      "type": "textBlock",
+      "name": "",
+      "label": "Text Block",
+      "description":"Used to add additional information to the form",
+      "subLabel": "",
+      "isShowLabel": true,
+      "placeholderText": "",
+      "containerClass": "col-md-12",
+      "additionalContainerClass": "",
+      "additionalFieldClass": "",
+      "additionalLabelClass": "",
+      "defaultValue": "",
+      "validations": [],
+      "text": ""
+    }
+]
 
 /**
  * Create new control data
@@ -311,5 +365,6 @@ function createControlData(controlKey) {
 export {
     CONTROLS,
     CONTROL_DEFAULT_DATA,
+    STATIC_CONTROLS,
     createControlData
 }

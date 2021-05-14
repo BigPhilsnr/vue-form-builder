@@ -27,22 +27,29 @@
             </label>
         </div>
 
+
+
         
         <div :class="styles.FORM.FORM_GROUP">
             <label>
                 Evaluated Visibility
-                <input type="checkbox" v-model="control.evaluatedVisibility">
+                <input type="checkbox" v-model="control.evaluatedVisibility"/>
             </label>
-        </div>        
+        </div>  
+
+           <div :class="styles.FORM.FORM_GROUP">
+            <label>Hide condition</label>
+            <textarea   :class="styles.FORM.FORM_CONTROL" v-model="control.hideCondition"/>
+        </div>      
 
         <div :class="styles.FORM.FORM_GROUP">
             <label>Field Placeholder (Optional)</label>
-            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.placeholderText">
+            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.placeholderText"/>
         </div>
 
         <div :class="styles.FORM.FORM_GROUP">
             <label>Default Value (Optional)</label>
-            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.defaultValue">
+            <input type="text" :class="styles.FORM.FORM_CONTROL" v-model="control.defaultValue"/>
         </div>
 
     </SidebarToggleableContainer>
@@ -60,7 +67,7 @@
             control: Object
         },
         created(){
-            this.control.depends = ""
+             this.control.depends = ""
         }
     }
 </script>
