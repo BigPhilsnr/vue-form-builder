@@ -3797,22 +3797,28 @@ exports.f = {}.propertyIsEnumerable;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MODEL; });
-/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4917");
-/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f7f");
-/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a481");
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("cadf");
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("456d");
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("ac6a");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("f751");
-/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _Users_philipademba_Documents_projects_vue_form_builder_node_modules_babel_runtime_corejs2_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("7618");
-/* harmony import */ var _configs_controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("8dbe");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a481");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4917");
+/* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("7f7f");
+/* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("6762");
+/* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("2fdb");
+/* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("cadf");
+/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("456d");
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("ac6a");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("f751");
+/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Users_philipademba_Documents_projects_vue_form_builder_node_modules_babel_runtime_corejs2_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("7618");
+/* harmony import */ var _configs_controls__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("8dbe");
+
+
 
 
 
@@ -3844,7 +3850,7 @@ var MODEL = {
     value: {
       deep: true,
       handler: function handler(val) {
-        if (Object(_Users_philipademba_Documents_projects_vue_form_builder_node_modules_babel_runtime_corejs2_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(val) !== "object") {
+        if (Object(_Users_philipademba_Documents_projects_vue_form_builder_node_modules_babel_runtime_corejs2_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"])(val) !== "object") {
           return;
         }
 
@@ -3890,17 +3896,20 @@ var MODEL = {
             section.controls.forEach(function (controlId) {
               if (_this2.formData.controls[controlId].evaluatedVisibility) {
                 var controlObj = _this2.formData.controls[controlId];
-                controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
-                console.log(controlObj);
 
-                _this2.$set(_this2.formData.controls, controlId, controlObj);
+                if (!controlObj.additionalContainerClass.includes("hide-me")) {
+                  controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
+                  console.log(controlObj);
+
+                  _this2.$set(_this2.formData.controls, controlId, controlObj);
+                }
               }
             });
           } else {
             section.controls.forEach(function (controlId) {
               if (_this2.formData.controls[controlId].evaluatedVisibility) {
                 var controlObj = _this2.formData.controls[controlId];
-                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me", "");
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replaceAll(" hide-me", "");
                 console.log(controlObj);
 
                 _this2.$set(_this2.formData.controls, controlId, controlObj);
@@ -3922,13 +3931,16 @@ var MODEL = {
 
           if (shouldBeHidden) {
             var controlObj = _this3.formData.controls[controlId];
-            controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
-            console.log(controlObj);
 
-            _this3.$set(_this3.formData.controls, controlId, controlObj);
+            if (!controlObj.additionalContainerClass.includes("hide-me")) {
+              controlObj.additionalContainerClass = controlObj.additionalContainerClass + " hide-me";
+              console.log(controlObj);
+
+              _this3.$set(_this3.formData.controls, controlId, controlObj);
+            }
           } else {
             var _controlObj = _this3.formData.controls[controlId];
-            _controlObj.additionalContainerClass = _controlObj.additionalContainerClass.replace(" hide-me", "");
+            _controlObj.additionalContainerClass = _controlObj.additionalContainerClass.replaceAll(" hide-me", "");
             console.log(_controlObj);
 
             _this3.$set(_this3.formData.controls, controlId, _controlObj);
@@ -3944,7 +3956,7 @@ var MODEL = {
       controlIds.forEach(function (controlId) {
         var controlItem = _this4.formData.controls[controlId]; // if disableValue is provided, we don't need to solve more for the control
 
-        if (typeof _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].disableValue === "boolean" && _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].disableValue) {
+        if (typeof _configs_controls__WEBPACK_IMPORTED_MODULE_10__[/* CONTROLS */ "a"][controlItem.type].disableValue === "boolean" && _configs_controls__WEBPACK_IMPORTED_MODULE_10__[/* CONTROLS */ "a"][controlItem.type].disableValue) {
           return;
         } // get the key-name value
 
@@ -3959,8 +3971,8 @@ var MODEL = {
 
         containerObj[name] = ""; // if the control has default factory creation closure, run it
 
-        if (typeof _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].rendererDefaultData === "function") {
-          containerObj[name] = _configs_controls__WEBPACK_IMPORTED_MODULE_8__[/* CONTROLS */ "a"][controlItem.type].rendererDefaultData(controlItem);
+        if (typeof _configs_controls__WEBPACK_IMPORTED_MODULE_10__[/* CONTROLS */ "a"][controlItem.type].rendererDefaultData === "function") {
+          containerObj[name] = _configs_controls__WEBPACK_IMPORTED_MODULE_10__[/* CONTROLS */ "a"][controlItem.type].rendererDefaultData(controlItem);
         }
       }); // emit to the parent for the value detail
 
@@ -10576,7 +10588,7 @@ var STATIC_CONTROLS = [//  {
   "isShowLabel": false,
   "placeholderText": "",
   "containerClass": "col-md-12",
-  "additionalContainerClass": "",
+  "additionalContainerClass": "mt-2 mb-2",
   "additionalFieldClass": "",
   "additionalLabelClass": "",
   "defaultValue": "",

@@ -319,7 +319,7 @@ const STATIC_CONTROLS = [
       "isShowLabel": false,
       "placeholderText": "",
       "containerClass": "col-md-12",
-      "additionalContainerClass": "",
+      "additionalContainerClass": "mt-2 mb-2",
       "additionalFieldClass": "",
       "additionalLabelClass": "",
       "defaultValue": "",

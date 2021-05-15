@@ -26,7 +26,7 @@ const MODEL = {
 
         const valx = this.executeAll(val);
         this.men(valx);
-        this.controlDepends(valx)
+        this.controlDepends(valx);
         // set value for fields
         Object.assign(this.valueContainer, valx);
       },
@@ -42,15 +42,14 @@ const MODEL = {
   },
 
   methods: {
-
     executeAll(val) {
       if (!this.formData.formConfig.formula.length) {
         return val;
       }
-    
-      this.formData.formConfig.formula.forEach((formula) =>{
-         val = this.executeFormalar(val, formula.formula, formula.output)
-      } );
+
+      this.formData.formConfig.formula.forEach((formula) => {
+        val = this.executeFormalar(val, formula.formula, formula.output);
+      });
 
       return val;
     },
@@ -64,46 +63,58 @@ const MODEL = {
             section.controls.forEach((controlId) => {
               if (this.formData.controls[controlId].evaluatedVisibility) {
                 const controlObj = this.formData.controls[controlId];
-                controlObj.additionalContainerClass = controlObj.additionalContainerClass+" hide-me";
-                console.log(controlObj);
-                this.$set(this.formData.controls, controlId, controlObj);
+                if (!controlObj.additionalContainerClass.includes("hide-me")) {
+                  controlObj.additionalContainerClass =
+                    controlObj.additionalContainerClass + " hide-me";
+                  console.log(controlObj);
+                  this.$set(this.formData.controls, controlId, controlObj);
+                }
               }
             });
           } else {
             section.controls.forEach((controlId) => {
               if (this.formData.controls[controlId].evaluatedVisibility) {
                 const controlObj = this.formData.controls[controlId];
-                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me","");
+                controlObj.additionalContainerClass = controlObj.additionalContainerClass.replaceAll(
+                  " hide-me",
+                  ""
+                );
                 console.log(controlObj);
                 this.$set(this.formData.controls, controlId, controlObj);
               }
             });
           }
         }
-      }); 
+      });
     },
     controlDepends(val) {
       const controlIds = Object.keys(this.formData.controls);
       controlIds.forEach((controlId) => {
         const control = this.formData.controls[controlId];
         if (control.hideCondition && control.hideCondition.length) {
-          const shouldBeHidden = this.executeDependency(val, control.hideCondition);
-          if (shouldBeHidden) {       
-              const controlObj = this.formData.controls[controlId];
-              controlObj.additionalContainerClass = controlObj.additionalContainerClass+" hide-me";
+          const shouldBeHidden = this.executeDependency(
+            val,
+            control.hideCondition
+          );
+          if (shouldBeHidden) {
+            const controlObj = this.formData.controls[controlId];
+            if (!controlObj.additionalContainerClass.includes("hide-me")) {
+              controlObj.additionalContainerClass =
+                controlObj.additionalContainerClass + " hide-me";
               console.log(controlObj);
               this.$set(this.formData.controls, controlId, controlObj);
-
+            }
           } else {
             const controlObj = this.formData.controls[controlId];
-            controlObj.additionalContainerClass = controlObj.additionalContainerClass.replace(" hide-me","");
+            controlObj.additionalContainerClass = controlObj.additionalContainerClass.replaceAll(
+              " hide-me",
+              ""
+            );
             console.log(controlObj);
             this.$set(this.formData.controls, controlId, controlObj);
           }
         }
       });
-
-      
     },
     createValueContainer() {
       let containerObj = {};
@@ -200,7 +211,7 @@ const MODEL = {
       });
 
       if (!hasFailed) {
-        console.log(str)
+        console.log(str);
         input[output] = eval(str);
       }
 
