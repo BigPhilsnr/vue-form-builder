@@ -27,9 +27,6 @@
             </label>
         </div>
 
-
-
-        
         <div :class="styles.FORM.FORM_GROUP">
             <label>
                 Evaluated Visibility

@@ -1,5 +1,6 @@
 <template>
     <div class="section-container" :class="{'active': isDoingConfiguration}">
+       
         <SectionNavigationBar :section="section"
                               @active="setActive" />
 

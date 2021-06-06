@@ -1,6 +1,10 @@
-<template>
-    <div :class="control.additionalFieldClass" v-text="control.text">
+ <template>
+ <div>
+     {{ this.valueContainer }}
+<div :class="control.additionalFieldClass" v-text="control.text">
     </div>
+ </div>
+    
 </template>
 
 <script>
@@ -11,7 +15,7 @@
      */
     export default {
         name: "TextBlockControl",
-        mixins: [CONTROL_FIELD_EXTEND_MIXIN]
+        mixins: [CONTROL_FIELD_EXTEND_MIXIN],
 
     }
 </script>

@@ -46,21 +46,24 @@
     </div>
 
     <div :class="styles.FORM.FORM_GROUP">
-      <label>
-        Select Formula Controls </label>
-        <select
-          :class="controlFieldClass"
-          @input="updateValue($event.target.value)"
-        >
-          <option
-            v-for="optionObj in sectionConfiguration.controls"
-            :key="optionObj"
-            :value="optionObj"
-            v-text="optionObj"
-            :selected="value === optionObj"
-          ></option>
-        </select>
-     
+      <label> Reference Table</label>
+      <div ref="doctype" class="ref-field-input"></div>
+    </div>
+
+    <div :class="styles.FORM.FORM_GROUP">
+      <label> Select Formula Controls </label>
+      <select
+        :class="controlFieldClass"
+        @input="updateValue($event.target.value)"
+      >
+        <option
+          v-for="optionObj in sectionConfiguration.controls"
+          :key="optionObj"
+          :value="optionObj"
+          v-text="optionObj"
+          :selected="value === optionObj"
+        ></option>
+      </select>
     </div>
 
     <div :class="styles.FORM.FORM_GROUP">
@@ -107,10 +110,39 @@ export default {
       this.dataPackage
     );
   },
+  mounted() {
+    if (frappe) {
+      this.makeSelectDoctypeControl();
+    }
+  },
   methods: {
     updateValue(val) {
       const value = this.sectionConfiguration.condition + "  " + `[${val}] `;
       this.$set(this.sectionConfiguration, "condition", value);
+    },
+    makeSelectDoctypeControl() {
+      let me = this;
+      let customer_field = frappe.ui.form.make_control({
+        df: {
+          label: __("Reference"),
+          fieldtype: "Link",
+          fieldname: "reference",
+          options: "Mtrh Forms",
+          placeholder: "Options",
+          onchange: function() {
+            if (this.value) {
+              me.sectionConfiguration.referenceTable = this.value;
+            }
+          },
+        },
+        parent: this.$refs["doctype"],
+        render_input: true,
+      });
+      customer_field.toggle_label(false);
+      customer_field.$input.val(me.sectionConfiguration.referenceTable);
+      $("#modal-body")
+        .find(".input-max-width")
+        .removeClass("input-max-width");
     },
   },
 };

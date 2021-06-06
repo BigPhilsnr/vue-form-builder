@@ -15,6 +15,10 @@ const CONTROL_FIELD_EXTEND_MIXIN = {
             type: Object,
             required: true
         },
+        valueContainer:{
+            type:Object,
+            defaultValue:null
+        },
 
         // v-model value
         value: null, // any types

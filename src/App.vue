@@ -148,7 +148,8 @@ export default {
           endDate: faker.date.future(),
         },
         total_value: faker.finance.amount(),
-      });
+      }
+      );
     },
   },
 };

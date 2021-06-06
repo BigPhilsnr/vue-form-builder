@@ -3,7 +3,7 @@
     <div>
       <b-table
         style="width: 100%"
-        :empty-text="`No items to show`"
+        :empty-text="`Items will be show here`"
         :empty-filtered-text="`No items to show`"
         :show-empty="true"
         :items="items"
@@ -22,20 +22,17 @@
     </div>
 
     <b-modal id="bv-modal-example" hide-footer size="xl">
-      <template #modal-title> Add row Item </template>
-      <b-button variant="primary" @click="getSave()" class="mt-3">
-        save</b-button
-      >
       <FormRenderer :form-configuration="formData" v-model="formInputData" />
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
-        >Close Me</b-button
-      >
+      <b-button variant="primary" class="mt-3" block @click="getSave()">
+        Save
+      </b-button>
     </b-modal>
     <div style="width:100%">
       <b-button
         variant="primary"
         id="show-btn"
         @click="$bvModal.show('bv-modal-example')"
+        v-if="!readOnly"
         >Add Row</b-button
       >
     </div>
@@ -43,22 +40,68 @@
 </template>
 
 <script>
-import { ROW_VIEW_MIXIN } from "@/mixins/row-view-mixin";
+import { TABLE_VIEW_MIXIN } from "@/mixins/table-view-mixin";
+import { getFormConfiguration,saveFormData } from "@/services/frappe";
 import AddControlControl from "@/views/builder/add-controls/AddControlControl";
 
 export default {
   name: "TableRowView",
   components: { AddControlControl },
-  mixins: [ROW_VIEW_MIXIN],
+  mixins: [TABLE_VIEW_MIXIN],
+ 
   methods: {
     getSave() {
       const data = this.formInputData;
       const returnedTarget = Object.assign({}, data);
       this.items.unshift(returnedTarget);
+      this.clearData()
     },
-    onRowSelected(val){
+    setValues(val) {
+      this.$set(this, "formInputData", val);
+    },
+     clearData() {
+      const val = {};
+      const keys = Object.keys(this.formInputData);
+      keys.forEach((key) => {
+        val[key] = "";
+      });
+
+      this.setValues(val);
+    },
+    onRowSelected(val) {},
+    getForm(name) {
+      getFormConfiguration({ name }).then((config) => {
+        const formStringConfig = config.formdata;
+        const configObject = JSON.parse(formStringConfig);
+        this.configuration = formStringConfig;
+        this.formName = config.name;
+        this.formData = configObject;
+        this.originalConfig = configObject;
+      });
+    },
+    saveForm(formData) {
+      saveFormData(formData).then((saved) => {      
         
-    }
+       
+      });
+    },
+
+    save() {
+      let form_content = this.formInputData;
+      form_content = JSON.stringify(form_content);
+      const form_name = this.formName;
+      const reference_doctype = this.selectedDoctype;
+      const reference_doctype_id = this.selectedDoctypeReference;
+      let doctype = "Mtrh Forms Repository";
+      let formData = {
+        doctype,
+        form_content,
+        form_name,
+        reference_doctype,
+        reference_doctype_id,
+      };
+      this.saveForm({ formData });
+    },
   },
   data() {
     return {
@@ -205,7 +248,7 @@ export default {
           },
         },
       },
-      formInputData:{},
+      formInputData: {},
     };
   },
 };

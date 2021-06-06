@@ -15,6 +15,7 @@ import ToggleableSectionView from "@/views/builder/section-views/ToggleableSecti
 
 import RendererNormalSectionView from "@/views/renderer/section-views/NormalSectionView";
 import RendererToggleableSectionView from "@/views/renderer/section-views/ToggleableSectionView";
+import RendererTableSectionView from "@/views/renderer/section-views/TableSectionView";
 
 
 const SECTION_TYPES = {
@@ -38,14 +39,14 @@ const SECTION_TYPES = {
         rendererView: RendererToggleableSectionView
     },
 
-    // table: {
-    //     name: "Table Block",
-    //     description: "Section block built from a table with 2 column",
-    //     value: 'table',
-
-    //     rowType: ROW_TYPES.tableRow,
-    //     builderView: TableSectionView
-    // },
+    table: {
+        name: "Table Block",
+        description: "Section block built from a table with 2 column",
+        value: 'table',
+        rowType: ROW_TYPES.tableRow,
+        builderView: TableSectionView,
+        rendererView: RendererTableSectionView
+    },
 
 
 };
@@ -69,6 +70,7 @@ const SECTION_DEFAULT_DATA = {
     type: '',
     rows: [], // array of rowId
     controls: [], // array of controlIds
+    referenceTable:''
 };
 
 /**
@@ -88,6 +90,7 @@ function createNewSection(type, sortOrder = 0) {
     newSectionData.headline = "New Section"
     newSectionData.subHeadline = "This is the sub-headline of the new section"
     newSectionData.sortOrder = sortOrder
+    newSectionData.referenceTable= "yes"
 
     return newSectionData;
 }

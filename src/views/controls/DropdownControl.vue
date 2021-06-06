@@ -39,7 +39,6 @@
         mixins: [CONTROL_FIELD_EXTEND_MIXIN],
         data: () => ({
             listOptions: [],
-
             dataMode: "",
             apiURL: "",
         }),

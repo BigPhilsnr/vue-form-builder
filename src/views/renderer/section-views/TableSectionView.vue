@@ -6,20 +6,13 @@
         </div>
 
         <div class="table-wrapper">
-            <table :class="styles.TABLE.TABLE_CLASS">
-                <!--- TODO: Sortable --->
 
-                <TableRowView v-for="(rowId) in section.rows"
-                              :key="rowId"
+             <FullTableRowRenderView 
+                              :key="'123'"
                               :section="section"
-                              :row="rows[rowId]" />
-
-                <tr>
-                    <td colspan="2">
-                        <AddRowControl @addRowNotify="addRow" />
-                    </td>
-                </tr>
-            </table>
+                              :parent ="parent"
+                              :readOnly="false"
+                              />
         </div>
     </div>
 </template>
@@ -28,13 +21,16 @@
     import {SECTION_VIEW_MIXINS} from "@/mixins/section-view-mixins";
     import {STYLE_INJECTION_MIXIN} from "@/mixins/style-injection-mixin";
     import AddRowControl from "@/views/builder/add-controls/AddRowControl";
-    import TableRowView from "@/views/builder/row-views/TableRowView";
+    import FullTableRowRenderView from "@/views/builder/row-views/FullTableRowRenderView";
 
     export default {
         name: "TableSectionView",
-        components: {TableRowView, AddRowControl},
+        components: {FullTableRowRenderView, AddRowControl},
         mixins: [SECTION_VIEW_MIXINS, STYLE_INJECTION_MIXIN],
         methods: {
+        },
+        props:{
+parent:String,
         }
     }
 </script>

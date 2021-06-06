@@ -5,6 +5,7 @@
                    :section="section"
                    :rows="rows"
                    :controls="controls"
+                   :parent ="parent"
                    :key="section.uniqueId"
                    :value-container="valueContainer"
                    :validation-errors="validationErrors"
@@ -26,10 +27,12 @@
             controls: Object,
             valueContainer: Object,
             validationErrors: Object,
+            parent: String,
         },
 
         computed: {
             sectionViewComponent() {
+                this.section.parent = this.parent;
                 return SECTION_TYPES[this.section.type].rendererView
             }
         },
