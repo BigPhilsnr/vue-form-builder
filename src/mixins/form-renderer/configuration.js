@@ -11,7 +11,7 @@ const CONFIGURATION = {
       type: Object,
       required: true,
     },
-    parent: { type: String, default: null },
+    parent: { type: String, default: "Parent" },
   },
 
   watch: {

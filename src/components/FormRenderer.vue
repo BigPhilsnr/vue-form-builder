@@ -1,5 +1,6 @@
 <template>
   <div :class="[styles.CONTAINER.FLUID, 'form-padding', 'vue-form-renderer']">
+    
     <!-- Render Form Tag Or Not -->
     <form
       v-if="formData.formConfig.renderFormTag"
@@ -43,6 +44,7 @@
       <SectionContainer
         v-for="sectionData in sortedSections"
         :section="sectionData"
+        :parent="parent"
         :rows="formData.rows"
         :controls="formData.controls"
         :key="sectionData.uniqueId"

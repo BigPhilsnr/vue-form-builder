@@ -21,4 +21,10 @@ const saveFormData = ({ formData }) =>
 
 const notify = (message) => {  frappe.show_alert(message, 5);};
 
-export { api, getFormConfiguration, saveFormData, notify };
+ const getList = (payload) =>
+    api({
+        method: "mtrh_dev.api.supplier-portal.base.base.get_list",
+        args: { payload },
+    });
+
+export { api, getFormConfiguration, saveFormData, notify,getList };

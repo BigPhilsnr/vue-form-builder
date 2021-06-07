@@ -1,5 +1,6 @@
 <template>
     <div class="section-container">
+      
 
         <component :is="sectionViewComponent"
                    :section="section"
@@ -27,7 +28,7 @@
             controls: Object,
             valueContainer: Object,
             validationErrors: Object,
-            parent: String,
+            parent:{type:String, default:"no parent"},
         },
 
         computed: {
