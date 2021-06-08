@@ -33,7 +33,7 @@ const getDoctypeFields = (payload) =>
   api({
     method: "clinical.api.doctype.meta.get_doctype_fields",
     args: { payload },
-  });
+  }).then(({ message }) => message);
 
 export {
   api,

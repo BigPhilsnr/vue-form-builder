@@ -3,7 +3,10 @@
         <h5>Control Configuration</h5>
 
         <!-- Basic of the control/Same for all -->
-        <ControlBasicInformation :control="control" />
+        <ControlBasicInformation 
+         :control="control"
+         :formData="formData"
+         />
         <ControlStylingInformation :control="control" />
 
         <!-- Control specific configuration / Only render it if the control has specific configuration view -->

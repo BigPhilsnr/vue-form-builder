@@ -40,13 +40,19 @@
 
     <div :class="styles.FORM.FORM_GROUP">
       <label>Mapped Field</label>
-      <input
-        type="text"
-        :class="styles.FORM.FORM_CONTROL"
-        v-model="control.mappedField"
-      />
+      <div>
+      
+        <select v-model="control.mappedField" :class="styles.FORM.FORM_CONTROL" >
+          <option disabled value="">Please select field</option>
+          <option
+            v-for="field in doctypeFields"
+            :key="field"
+            >{{ field }}
+          </option>
+        </select>
+      
+      </div>
     </div>
-
 
     <div :class="styles.FORM.FORM_GROUP">
       <label>
@@ -93,9 +99,7 @@
 <script>
 import SidebarToggleableContainer from "@/views/container-views/SidebarToggleableContainer";
 import { STYLE_INJECTION_MIXIN } from "@/mixins/style-injection-mixin";
-import {
-  getDoctypeFields
-} from "@/services/frappe";
+import { getDoctypeFields } from "@/services/frappe";
 
 export default {
   name: "ControlBasicInformation",
@@ -103,22 +107,42 @@ export default {
   components: { SidebarToggleableContainer },
   data() {
     return {
-      doctypeFields
-    }
+      doctypeFields: [],
+    };
   },
   props: {
     control: Object,
+    formData: Object,
   },
   created() {
     this.control.depends = "";
   },
-  methods:{
-   getFields(){
-     
-   }
+  watch:{
+    formData(val){
+      this.getFields();
+    }
   },
-
- 
+  mounted() {
+    this.getFields();
+  },
+  methods: {
+    getFields() {
+      if (
+        this.formData &&
+        this.formData.formConfig &&
+        this.formData.formConfig.mappedDoctype.length
+      ) {
+        let data = { doctype: this.formData.formConfig.mappedDoctype};
+    
+        getDoctypeFields(data).then((result) => {
+          this.doctypeFields = result.fields.map(item=> item.fieldname);
+        });
+      }
+    },
+    setField(field) {
+      this.$set(this.control, "mappedField", field);
+    },
+  },
 };
 </script>
 
