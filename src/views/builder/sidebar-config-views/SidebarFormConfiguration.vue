@@ -27,6 +27,12 @@
         />
       </div>
 
+       <div :class="styles.FORM.FORM_GROUP">
+      <label> Mapped Doctype</label>
+      <div ref="doctype" class="ref-field-input"></div>
+    </div>
+
+
       <div :class="styles.FORM.FORM_GROUP">
         <label>
           Show Form Headline?
@@ -159,6 +165,9 @@ export default {
     frm: false,
     frmConfig: false,
   }),
+  mounted() {
+    this.makeSelectDoctypeControl();
+  },
   methods: {
     addFormula() {
       this.formConfiguration.formula.push(this.tempFormula);
@@ -170,6 +179,32 @@ export default {
       );
       this.formConfiguration.formula = result;
     },
+
+    makeSelectDoctypeControl() {
+      let me = this;
+      let customer_field = frappe.ui.form.make_control({
+        df: {
+          label: __("Reference"),
+          fieldtype: "Link",
+          fieldname: "reference",
+          options: "DocType",
+          placeholder: "Select doctype",
+          onchange: function() {
+            if (this.value) {
+              me.formConfiguration.mappedDoctype = this.value;
+            }
+          },
+        },
+        parent: this.$refs["doctype"],
+        render_input: true,
+      });
+      customer_field.toggle_label(false);
+      customer_field.$input.val(me.formConfiguration.mappedDoctype);
+      $("#modal-body")
+        .find(".input-max-width")
+        .removeClass("input-max-width");
+    },
+  
   },
 
   created() {

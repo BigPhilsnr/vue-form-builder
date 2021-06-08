@@ -20,7 +20,7 @@
         hover
       />
     </div>
-    {{loaded}}
+
 
     <b-modal :id="section.referenceTable" hide-footer size="xl">
       <FormRenderer :form-configuration="formData" v-model="formInputData" />
@@ -64,7 +64,7 @@ export default {
   },
   watch: {
     loaded(val){
-      alert(JSON.stringify(val))
+    
       if(val.length){
         this.items = val;
       }

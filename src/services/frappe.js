@@ -19,12 +19,27 @@ const saveFormData = ({ formData }) =>
     },
   }).then(({ message }) => message);
 
-const notify = (message) => {  frappe.show_alert(message, 5);};
+const notify = (message) => {
+  frappe.show_alert(message, 5);
+};
 
- const getList = (payload) =>
-    api({
-        method: "mtrh_dev.api.supplier-portal.base.base.get_list",
-        args: { payload },
-    });
+const getList = (payload) =>
+  api({
+    method: "mtrh_dev.api.supplier-portal.base.base.get_list",
+    args: { payload },
+  });
 
-export { api, getFormConfiguration, saveFormData, notify,getList };
+const getDoctypeFields = (payload) =>
+  api({
+    method: "clinical.api.doctype.meta.get_doctype_fields",
+    args: { payload },
+  });
+
+export {
+  api,
+  getFormConfiguration,
+  saveFormData,
+  notify,
+  getList,
+  getDoctypeFields,
+};

@@ -47,11 +47,11 @@ export default {
         fields: ["*"],
         order_by: "creation desc",
         page: 1,
-        start: 1,
+        start: 0,
         limit: 20,
       };
       getList(formData).then((response) => {
-        this.loaded = response;
+        this.loaded = response.message.map(item => { return JSON.parse(item.form_content)});
       });
     },
   },

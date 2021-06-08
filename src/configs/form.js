@@ -1,7 +1,3 @@
-/**
- * Form-Configuration for Vue-Form-Builder
- * @author Phat Tran
- */
 
 const FORM_DEFAULT_DATA = {
     headline: "",
@@ -12,6 +8,9 @@ const FORM_DEFAULT_DATA = {
     renderFormTag: false,
     formActionURL: "",
     formMethod: "POST",
+    mappedDoctype:""
+
+
 };
 
 export {

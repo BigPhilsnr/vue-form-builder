@@ -303,6 +303,7 @@ const CONTROL_DEFAULT_DATA = {
   defaultValue: "",
   validations: [],
   hideCondition: "",
+  mappedField:"",
 
   // data of the others - coming up later
 };
