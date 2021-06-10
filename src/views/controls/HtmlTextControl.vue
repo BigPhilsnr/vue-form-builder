@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div  :style="{  'min-height': ((control.height+130 )||330 ) + 'px' }">
     <vue-editor
       v-model="value"
       :id="control.uniqueId"
       type="text"
       :value="value"
-      :rows="control.rows"
       :name="control.name || control.uniqueId"
       :placeholder="control.placeholderText"
+      :style="{  'min-height': (control.height ||200 ) + 'px' }"
     />
   </div>
 </template>

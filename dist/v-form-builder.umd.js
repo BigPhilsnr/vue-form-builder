@@ -2103,7 +2103,7 @@ var FormBuilder = __webpack_require__("6a29");
 // EXTERNAL MODULE: ./src/components/FormRenderer.vue + 21 modules
 var FormRenderer = __webpack_require__("fbdb");
 
-// EXTERNAL MODULE: ./src/configs/controls.js + 107 modules
+// EXTERNAL MODULE: ./src/configs/controls.js + 127 modules
 var controls = __webpack_require__("8dbe");
 
 // EXTERNAL MODULE: ./src/configs/styles.js
@@ -8021,7 +8021,7 @@ var SidebarFormulaSelectListvue_type_template_id_55bddb78_scoped_true_staticRend
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__("bd86");
 
-// EXTERNAL MODULE: ./src/configs/controls.js + 107 modules
+// EXTERNAL MODULE: ./src/configs/controls.js + 127 modules
 var controls = __webpack_require__("8dbe");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/builder/sidebar-config-views/SidebarFormulaSelectList.vue?vue&type=script&lang=js&
@@ -10852,6 +10852,62 @@ var DatePickerControl_component = Object(componentNormalizer["a" /* default */])
 )
 
 /* harmony default export */ var DatePickerControl = (DatePickerControl_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/DateControl.vue?vue&type=template&id=953c4b9a&scoped=true&
+var DateControlvue_type_template_id_953c4b9a_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-form-datepicker',{attrs:{"id":_vm.control.uniqueId,"value":_vm.value,"show-decade-nav":true,"today-button":"","reset-button":"","close-button":"","locale":"en"},on:{"input":_vm.dataChanged}})],1)}
+var DateControlvue_type_template_id_953c4b9a_scoped_true_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/views/controls/DateControl.vue?vue&type=template&id=953c4b9a&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/DateControl.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var DateControlvue_type_script_lang_js_ = ({
+  name: "DateControl",
+  mixins: [control_field_extend_mixin["a" /* CONTROL_FIELD_EXTEND_MIXIN */]],
+  methods: {
+    dataChanged: function dataChanged(val) {
+      this.updateValue(val);
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/views/controls/DateControl.vue?vue&type=script&lang=js&
+ /* harmony default export */ var controls_DateControlvue_type_script_lang_js_ = (DateControlvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/views/controls/DateControl.vue
+
+
+
+
+
+/* normalize component */
+
+var DateControl_component = Object(componentNormalizer["a" /* default */])(
+  controls_DateControlvue_type_script_lang_js_,
+  DateControlvue_type_template_id_953c4b9a_scoped_true_render,
+  DateControlvue_type_template_id_953c4b9a_scoped_true_staticRenderFns,
+  false,
+  null,
+  "953c4b9a",
+  null
+  
+)
+
+/* harmony default export */ var DateControl = (DateControl_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/NumberControl.vue?vue&type=template&id=7f8d83f0&scoped=true&
 var NumberControlvue_type_template_id_7f8d83f0_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',{class:_vm.controlFieldClass,attrs:{"id":_vm.control.uniqueId,"type":"number","name":_vm.control.name,"placeholder":_vm.control.placeholderText},domProps:{"value":_vm.number},on:{"input":function($event){return _vm.convertToNumber($event.target.value)}}})}
 var NumberControlvue_type_template_id_7f8d83f0_scoped_true_staticRenderFns = []
@@ -11143,12 +11199,12 @@ var DropdownControl_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var DropdownControl = (DropdownControl_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/LinkControl.vue?vue&type=template&id=6aeca0e4&scoped=true&
-var LinkControlvue_type_template_id_6aeca0e4_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('input',{directives:[{name:"show",rawName:"v-show",value:(false),expression:"false"}],class:_vm.controlFieldClass,attrs:{"id":_vm.control.uniqueId,"type":"text","name":_vm.control.name || _vm.control.uniqueId,"placeholder":_vm.control.placeholderText},domProps:{"value":_vm.value}}),_c('div',{ref:"doctype",staticClass:"ref-field-input"})])}
-var LinkControlvue_type_template_id_6aeca0e4_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/LinkControl.vue?vue&type=template&id=7f48af02&scoped=true&
+var LinkControlvue_type_template_id_7f48af02_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('input',{directives:[{name:"show",rawName:"v-show",value:(false),expression:"false"}],class:_vm.controlFieldClass,attrs:{"id":_vm.control.uniqueId,"type":"text","name":_vm.control.name || _vm.control.uniqueId,"placeholder":_vm.control.placeholderText},domProps:{"value":_vm.value}}),_c('div',{ref:"doctype",staticClass:"ref-field-input",attrs:{"id":("div-" + (_vm.control.uniqueId))}})])}
+var LinkControlvue_type_template_id_7f48af02_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/views/controls/LinkControl.vue?vue&type=template&id=6aeca0e4&scoped=true&
+// CONCATENATED MODULE: ./src/views/controls/LinkControl.vue?vue&type=template&id=7f48af02&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.find.js
 var es6_array_find = __webpack_require__("7514");
@@ -11170,21 +11226,27 @@ var es6_array_find = __webpack_require__("7514");
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ var LinkControlvue_type_script_lang_js_ = ({
   name: "LinkControl",
   mixins: [control_field_extend_mixin["a" /* CONTROL_FIELD_EXTEND_MIXIN */]],
   data: function data() {
     return {
-      searchValue: ""
+      searchValue: "",
+      linkControl: null
     };
   },
   mounted: function mounted() {
     this.makeSelectDoctypeControl();
+  },
+  watch: {
+    value: function value(val) {
+      if (!val || !val.length) {
+        this.linkControl.$input.val("test ");
+      } else {
+        this.linkControl.$input.val(val);
+      }
+    }
   },
   methods: {
     makeSelectDoctypeControl: function makeSelectDoctypeControl() {
@@ -11208,6 +11270,7 @@ var es6_array_find = __webpack_require__("7514");
       customer_field.toggle_label(false);
       customer_field.$input.val(me.value);
       $("#modal-body").find(".input-max-width").removeClass("input-max-width");
+      this.linkControl = customer_field;
     }
   }
 });
@@ -11223,22 +11286,22 @@ var es6_array_find = __webpack_require__("7514");
 
 var LinkControl_component = Object(componentNormalizer["a" /* default */])(
   controls_LinkControlvue_type_script_lang_js_,
-  LinkControlvue_type_template_id_6aeca0e4_scoped_true_render,
-  LinkControlvue_type_template_id_6aeca0e4_scoped_true_staticRenderFns,
+  LinkControlvue_type_template_id_7f48af02_scoped_true_render,
+  LinkControlvue_type_template_id_7f48af02_scoped_true_staticRenderFns,
   false,
   null,
-  "6aeca0e4",
+  "7f48af02",
   null
   
 )
 
 /* harmony default export */ var LinkControl = (LinkControl_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/HtmlTextControl.vue?vue&type=template&id=3246b8b7&scoped=true&
-var HtmlTextControlvue_type_template_id_3246b8b7_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('vue-editor',{attrs:{"id":_vm.control.uniqueId,"type":"text","value":_vm.value,"rows":_vm.control.rows,"name":_vm.control.name || _vm.control.uniqueId,"placeholder":_vm.control.placeholderText},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
-var HtmlTextControlvue_type_template_id_3246b8b7_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/HtmlTextControl.vue?vue&type=template&id=48ec4261&scoped=true&
+var HtmlTextControlvue_type_template_id_48ec4261_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({  'min-height': ((_vm.control.height+130 )||330 ) + 'px' })},[_c('vue-editor',{style:({  'min-height': (_vm.control.height ||200 ) + 'px' }),attrs:{"id":_vm.control.uniqueId,"type":"text","value":_vm.value,"name":_vm.control.name || _vm.control.uniqueId,"placeholder":_vm.control.placeholderText},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
+var HtmlTextControlvue_type_template_id_48ec4261_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/views/controls/HtmlTextControl.vue?vue&type=template&id=3246b8b7&scoped=true&
+// CONCATENATED MODULE: ./src/views/controls/HtmlTextControl.vue?vue&type=template&id=48ec4261&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/vue2-editor/dist/vue2-editor.esm.js
 var vue2_editor_esm = __webpack_require__("5873");
@@ -11284,16 +11347,100 @@ var vue2_editor_esm = __webpack_require__("5873");
 
 var HtmlTextControl_component = Object(componentNormalizer["a" /* default */])(
   controls_HtmlTextControlvue_type_script_lang_js_,
-  HtmlTextControlvue_type_template_id_3246b8b7_scoped_true_render,
-  HtmlTextControlvue_type_template_id_3246b8b7_scoped_true_staticRenderFns,
+  HtmlTextControlvue_type_template_id_48ec4261_scoped_true_render,
+  HtmlTextControlvue_type_template_id_48ec4261_scoped_true_staticRenderFns,
   false,
   null,
-  "3246b8b7",
+  "48ec4261",
   null
   
 )
 
 /* harmony default export */ var HtmlTextControl = (HtmlTextControl_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/TimeControl.vue?vue&type=template&id=8b47d828&scoped=true&
+var TimeControlvue_type_template_id_8b47d828_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-time',{attrs:{"id":_vm.control.uniqueId,"value":_vm.value,"show-seconds":"","hour12":false,"locale":"en"},on:{"input":_vm.dataChanged}},[_c('div',{staticClass:"d-flex",attrs:{"dir":"ltr"}},[(_vm.value)?_c('b-button',{attrs:{"size":"sm","variant":"outline-danger"},on:{"click":_vm.clearTime}},[_vm._v(" Clear time ")]):_vm._e(),_c('b-button',{staticClass:"ml-auto",attrs:{"size":"sm","variant":"outline-primary"},on:{"click":_vm.setNow}},[_vm._v(" Set Now ")])],1)])],1)}
+var TimeControlvue_type_template_id_8b47d828_scoped_true_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/views/controls/TimeControl.vue?vue&type=template&id=8b47d828&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/controls/TimeControl.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var TimeControlvue_type_script_lang_js_ = ({
+  name: "TimeControl",
+  mixins: [control_field_extend_mixin["a" /* CONTROL_FIELD_EXTEND_MIXIN */]],
+  data: function data() {
+    return {
+      searchValue: ""
+    };
+  },
+  methods: {
+    setNow: function setNow() {
+      var now = new Date();
+      this.value = now.toTimeString().slice(0, 8);
+    },
+    clearTime: function clearTime() {
+      this.value = "";
+    },
+    dataChanged: function dataChanged(val) {
+      this.updateValue(val);
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/views/controls/TimeControl.vue?vue&type=script&lang=js&
+ /* harmony default export */ var controls_TimeControlvue_type_script_lang_js_ = (TimeControlvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/views/controls/TimeControl.vue
+
+
+
+
+
+/* normalize component */
+
+var TimeControl_component = Object(componentNormalizer["a" /* default */])(
+  controls_TimeControlvue_type_script_lang_js_,
+  TimeControlvue_type_template_id_8b47d828_scoped_true_render,
+  TimeControlvue_type_template_id_8b47d828_scoped_true_staticRenderFns,
+  false,
+  null,
+  "8b47d828",
+  null
+  
+)
+
+/* harmony default export */ var TimeControl = (TimeControl_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/control-configs/TextBlockConfigView.vue?vue&type=template&id=7c65e5f4&
 var TextBlockConfigViewvue_type_template_id_7c65e5f4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Text for Text-Block")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.control.text),expression:"control.text"}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"text","rows":"6"},domProps:{"value":(_vm.control.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "text", $event.target.value)}}})])])}
 var TextBlockConfigViewvue_type_template_id_7c65e5f4_staticRenderFns = []
@@ -12195,6 +12342,97 @@ var LinkConfigView_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var LinkConfigView = (LinkConfigView_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/control-configs/TimeConfigView.vue?vue&type=template&id=79216743&
+var TimeConfigViewvue_type_template_id_79216743_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Hide header")]),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.control.hideHeader),expression:"control.hideHeader",modifiers:{"number":true}}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.control.hideHeader)?_vm._i(_vm.control.hideHeader,null)>-1:(_vm.control.hideHeader)},on:{"change":function($event){var $$a=_vm.control.hideHeader,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=_vm._n(null),$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.control, "hideHeader", $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.control, "hideHeader", $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.control, "hideHeader", $$c)}}}})])])}
+var TimeConfigViewvue_type_template_id_79216743_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/views/control-configs/TimeConfigView.vue?vue&type=template&id=79216743&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/control-configs/TimeConfigView.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var TimeConfigViewvue_type_script_lang_js_ = ({
+  name: "TimeConfigView",
+  mixins: [control_special_config_mixin["a" /* CONTROL_SPECIAL_CONFIG_MIXIN */]]
+});
+// CONCATENATED MODULE: ./src/views/control-configs/TimeConfigView.vue?vue&type=script&lang=js&
+ /* harmony default export */ var control_configs_TimeConfigViewvue_type_script_lang_js_ = (TimeConfigViewvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/views/control-configs/TimeConfigView.vue
+
+
+
+
+
+/* normalize component */
+
+var TimeConfigView_component = Object(componentNormalizer["a" /* default */])(
+  control_configs_TimeConfigViewvue_type_script_lang_js_,
+  TimeConfigViewvue_type_template_id_79216743_render,
+  TimeConfigViewvue_type_template_id_79216743_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var TimeConfigView = (TimeConfigView_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f31a2c10-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/control-configs/HtmlTextConfigView.vue?vue&type=template&id=5d0ffff5&
+var HtmlTextConfigViewvue_type_template_id_5d0ffff5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{class:_vm.styles.FORM.FORM_GROUP},[_c('label',[_vm._v("Height ")]),_c('input',{directives:[{name:"model",rawName:"v-model.number",value:(_vm.control.height),expression:"control.height",modifiers:{"number":true}}],class:_vm.styles.FORM.FORM_CONTROL,attrs:{"type":"number","step":"1"},domProps:{"value":(_vm.control.height)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.control, "height", _vm._n($event.target.value))},"blur":function($event){return _vm.$forceUpdate()}}}),_c('small',[_vm._v("`row` Height of the editor")])])])}
+var HtmlTextConfigViewvue_type_template_id_5d0ffff5_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/views/control-configs/HtmlTextConfigView.vue?vue&type=template&id=5d0ffff5&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/control-configs/HtmlTextConfigView.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var HtmlTextConfigViewvue_type_script_lang_js_ = ({
+  name: "TextConfigView",
+  mixins: [control_special_config_mixin["a" /* CONTROL_SPECIAL_CONFIG_MIXIN */]]
+});
+// CONCATENATED MODULE: ./src/views/control-configs/HtmlTextConfigView.vue?vue&type=script&lang=js&
+ /* harmony default export */ var control_configs_HtmlTextConfigViewvue_type_script_lang_js_ = (HtmlTextConfigViewvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/views/control-configs/HtmlTextConfigView.vue
+
+
+
+
+
+/* normalize component */
+
+var HtmlTextConfigView_component = Object(componentNormalizer["a" /* default */])(
+  control_configs_HtmlTextConfigViewvue_type_script_lang_js_,
+  HtmlTextConfigViewvue_type_template_id_5d0ffff5_render,
+  HtmlTextConfigViewvue_type_template_id_5d0ffff5_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var HtmlTextConfigView = (HtmlTextConfigView_component.exports);
 // CONCATENATED MODULE: ./src/configs/controls.js
 
 
@@ -12218,7 +12456,11 @@ var LinkConfigView_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
+
  // Control-Config-Component
+
+
 
 
 
@@ -12247,6 +12489,15 @@ var CONTROLS = {
     fieldComponent: LinkControl,
     configComponent: LinkConfigView
   },
+  time: {
+    name: "Time Field",
+    description: "Add time selection",
+    icon: "editPencil",
+    // Follow ICON in `icon-facade.js` to see how it works.
+    // component mapping
+    fieldComponent: TimeControl,
+    configComponent: TimeConfigView
+  },
   htmlText: {
     name: "Formatted Text Field",
     description: "For fomated long text",
@@ -12254,7 +12505,7 @@ var CONTROLS = {
     // Follow ICON in `icon-facade.js` to see how it works.
     // component mapping
     fieldComponent: HtmlTextControl,
-    configComponent: TextConfigView
+    configComponent: HtmlTextConfigView
   },
   number: {
     name: "Number Input Field",
@@ -12290,6 +12541,13 @@ var CONTROLS = {
     fieldComponent: TextControl,
     configComponent: TextConfigView
   },
+  date: {
+    name: "Date Picker",
+    description: "Simple date picker field",
+    // component mapping
+    fieldComponent: DateControl,
+    configComponent: TimeConfigView
+  },
   // I would love to support this, but the thing is, many rich editors are too large:
   // js: 150KB+
   // css: 30KB+
@@ -12298,11 +12556,11 @@ var CONTROLS = {
   //     name: "Rich-Text Field",
   //     description: "Multiple line text field - Rich Editor (WYSIWYG)",
   // },
-  date: {
+  datex: {
     name: "Date Picker",
     description: "Simple date picker field",
     configData: {
-      format: "DD/MM/YYYY",
+      format: "YYYY-MM-DD",
       firstDay: DATE_PICKER_START_DATES.monday.val,
       // 0 Sunday, 1 Monday,...
       numberOfMonths: 1,
@@ -33462,7 +33720,7 @@ var es6_object_assign = __webpack_require__("f751");
 // EXTERNAL MODULE: ./src/configs/section.js + 109 modules
 var section = __webpack_require__("dd3c");
 
-// EXTERNAL MODULE: ./src/configs/controls.js + 107 modules
+// EXTERNAL MODULE: ./src/configs/controls.js + 127 modules
 var controls = __webpack_require__("8dbe");
 
 // EXTERNAL MODULE: ./src/configs/form.js
@@ -34888,7 +35146,7 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || Object(unsupportedIterableToArray["a" /* default */])(arr) || _nonIterableSpread();
 }
-// EXTERNAL MODULE: ./src/configs/controls.js + 107 modules
+// EXTERNAL MODULE: ./src/configs/controls.js + 127 modules
 var controls = __webpack_require__("8dbe");
 
 // EXTERNAL MODULE: ./src/mixins/sidebar-body-mixin.js

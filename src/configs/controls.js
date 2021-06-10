@@ -23,10 +23,12 @@ import TextBlockControl from "@/views/controls/TextBlockControl";
 import LabelControl from "@/views/controls/LabelControl";
 import RadioCheckboxControl from "@/views/controls/RadioCheckboxControl";
 import DatePickerControl from "@/views/controls/DatePickerControl";
+import DateControl from "@/views/controls/DateControl";
 import NumberControl from "@/views/controls/NumberControl";
 import DropdownControl from "@/views/controls/DropdownControl";
 import LinkControl from "@/views/controls/LinkControl"
 import HtmlTextControl from "@/views/controls/HtmlTextControl"
+import TimeControl from "@/views/controls/TimeControl"
 
 // Control-Config-Component
 import TextBlockConfigView from "@/views/control-configs/TextBlockConfigView";
@@ -38,6 +40,8 @@ import DatePickerConfigView from "@/views/control-configs/DatePickerConfigView";
 import TextConfigView from "@/views/control-configs/TextConfigView";
 import DropdownConfigView from "@/views/control-configs/DropdownConfigView";
 import LinkConfigView from "@/views/control-configs/LinkConfigView";
+import TimeConfigView from "@/views/control-configs/TimeConfigView";
+import HtmlTextConfigView from "@/views/control-configs/HtmlTextConfigView";
 
 const CONTROLS = {
   input: {
@@ -59,6 +63,15 @@ const CONTROLS = {
     configComponent: LinkConfigView,
   },
 
+  time: {
+    name: "Time Field",
+    description: "Add time selection",
+    icon: "editPencil", // Follow ICON in `icon-facade.js` to see how it works.
+
+    // component mapping
+    fieldComponent: TimeControl,
+    configComponent: TimeConfigView,
+  },
   htmlText: {
     name: "Formatted Text Field",
     description: "For fomated long text",
@@ -66,7 +79,7 @@ const CONTROLS = {
 
     // component mapping
     fieldComponent: HtmlTextControl,
-    configComponent: TextConfigView,
+    configComponent: HtmlTextConfigView,
   },
 
 
@@ -107,6 +120,14 @@ const CONTROLS = {
     configComponent: TextConfigView,
   },
 
+  date: {
+    name: "Date Picker",
+    description: "Simple date picker field",
+    // component mapping
+    fieldComponent: DateControl,
+    configComponent: TimeConfigView,
+  },
+
   // I would love to support this, but the thing is, many rich editors are too large:
   // js: 150KB+
   // css: 30KB+
@@ -116,12 +137,12 @@ const CONTROLS = {
   //     description: "Multiple line text field - Rich Editor (WYSIWYG)",
   // },
 
-  date: {
+  datex: {
     name: "Date Picker",
     description: "Simple date picker field",
 
     configData: {
-      format: "DD/MM/YYYY",
+      format: "YYYY-MM-DD",
       firstDay: DATE_PICKER_START_DATES.monday.val, // 0 Sunday, 1 Monday,...
       numberOfMonths: 1, // Number of Month(s) will be shown
       numberOfColumns: 1, // Number of Column(s) will be shown

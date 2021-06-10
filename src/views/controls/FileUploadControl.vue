@@ -9,7 +9,11 @@
       :name="control.name || control.uniqueId"
       :placeholder="control.placeholderText"
     />
-    <div ref="doctype" :id="`div-${control.uniqueId}`" class="ref-field-input"></div>
+    <div
+      ref="doctype"
+      class="ref-field-input"
+    >
+    </div>
   </div>
 </template>
 
@@ -22,21 +26,11 @@ export default {
   data() {
     return {
       searchValue: "",
-      linkControl: null,
     };
   },
-  mounted() {
+ mounted() {
     this.makeSelectDoctypeControl();
-  },
-  watch: {
-    value(val) {
-      if (!val || !val.length) {
-        this.linkControl.$input.val("test ");
-      }else{
-        this.linkControl.$input.val(val);
-      }
-    },
-  },
+ },
   methods: {
     makeSelectDoctypeControl() {
       let me = this;
@@ -49,7 +43,7 @@ export default {
           placeholder: me.control.placeholderText,
           onchange: function() {
             if (this.value) {
-              me.updateValue(this.value);
+              me.updateValue(this.value)
             }
           },
         },
@@ -61,7 +55,6 @@ export default {
       $("#modal-body")
         .find(".input-max-width")
         .removeClass("input-max-width");
-      this.linkControl = customer_field;
     },
   },
 };
