@@ -2,8 +2,8 @@
   <div>
     <b-time
       :id="control.uniqueId"
-     :value="value"
-     @input="dataChanged"
+      :value="value"
+      @input="dataChanged"
       show-seconds
       :hour12="false"
       locale="en"
@@ -41,7 +41,7 @@ export default {
       searchValue: "",
     };
   },
- 
+
   methods: {
     setNow() {
       const now = new Date();
@@ -50,9 +50,9 @@ export default {
     clearTime() {
       this.value = "";
     },
-     dataChanged(val){
-     this.updateValue(val)
-    }
+    dataChanged(val) {
+      this.updateValue(val);
+    },
   },
 };
 </script>

@@ -65,7 +65,7 @@ const SECTION_DEFAULT_DATA = {
 
     isShowHeadline: true,
     condition:"",
-
+    tableReference:"",
     sortOrder: 0,
     type: '',
     rows: [], // array of rowId
@@ -90,7 +90,7 @@ function createNewSection(type, sortOrder = 0) {
     newSectionData.headline = "New Section"
     newSectionData.subHeadline = "This is the sub-headline of the new section"
     newSectionData.sortOrder = sortOrder
-    newSectionData.referenceTable= "yes"
+    newSectionData.referenceTable= " "
 
     return newSectionData;
 }

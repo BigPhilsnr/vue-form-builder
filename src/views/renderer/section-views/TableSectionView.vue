@@ -17,6 +17,8 @@
         :section="section"
         :parent="parent"
         :loaded="loaded"
+        :valueContainer="valueContainer"
+        @items="loadItems"
         :readOnly="false"
       />
     </div>
@@ -28,6 +30,7 @@ import { SECTION_VIEW_MIXINS } from "@/mixins/section-view-mixins";
 import { STYLE_INJECTION_MIXIN } from "@/mixins/style-injection-mixin";
 import AddRowControl from "@/views/builder/add-controls/AddRowControl";
 import FullTableRowRenderView from "@/views/builder/row-views/FullTableRowRenderView";
+import {RENDERER_SECTION_VIEW_MIXIN} from "@/mixins/renderer-section-view-mixin";
 import {
   getList,
 } from "@/services/frappe";
@@ -35,7 +38,7 @@ import {
 export default {
   name: "TableSectionView",
   components: { FullTableRowRenderView, AddRowControl },
-  mixins: [SECTION_VIEW_MIXINS, STYLE_INJECTION_MIXIN],
+  mixins: [SECTION_VIEW_MIXINS, STYLE_INJECTION_MIXIN,RENDERER_SECTION_VIEW_MIXIN],
   methods: {
     getTableData() {
       const doctype = "Mtrh Forms Repository";
@@ -53,7 +56,9 @@ export default {
       getList(formData).then((response) => {
         this.loaded = response.message.map(item => { return JSON.parse(item.form_content)});
       });
-    },
+    },loadItems(val){
+       this.section.childTable = val;
+    }
   },
   props: {
     parent: String,

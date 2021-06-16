@@ -67,6 +67,16 @@
     </div>
 
     <div :class="styles.FORM.FORM_GROUP">
+      <label>Child Table Reference</label>
+      <input
+        type="text"
+        placeholder="Write your formula here"
+        :class="styles.FORM.FORM_CONTROL"
+        v-model="sectionConfiguration.tableReference"
+      />
+    </div>
+
+    <div :class="styles.FORM.FORM_GROUP">
       <label>Evaluation visibility</label>
       <textarea
         type="text"

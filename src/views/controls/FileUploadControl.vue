@@ -1,19 +1,12 @@
 <template>
   <div>
-    <input
-      v-show="false"
-      :id="control.uniqueId"
-      type="text"
-      :class="controlFieldClass"
-      :value="value"
-      :name="control.name || control.uniqueId"
-      :placeholder="control.placeholderText"
-    />
-    <div
-      ref="doctype"
-      class="ref-field-input"
-    >
-    </div>
+   <button :id="control.uniqueId"
+            :class="buttonClasses"
+            :name="control.name"
+            v-text="control.label"
+            :type="control.buttonType || 'button'"
+            @click="uploadFile()">
+  
   </div>
 </template>
 
@@ -21,7 +14,7 @@
 import { CONTROL_FIELD_EXTEND_MIXIN } from "@/mixins/control-field-extend-mixin";
 
 export default {
-  name: "LinkControl",
+  name: "FileUploadControl",
   mixins: [CONTROL_FIELD_EXTEND_MIXIN],
   data() {
     return {
@@ -32,30 +25,18 @@ export default {
     this.makeSelectDoctypeControl();
  },
   methods: {
-    makeSelectDoctypeControl() {
-      let me = this;
-      let customer_field = frappe.ui.form.make_control({
-        df: {
-          label: __("Reference"),
-          fieldtype: "Link",
-          fieldname: "reference",
-          options: me.control.searchDocument,
-          placeholder: me.control.placeholderText,
-          onchange: function() {
-            if (this.value) {
-              me.updateValue(this.value)
-            }
-          },
+     uploadFile() {
+      const me = this;
+      new frappe.ui.FileUploaderCustom({
+        doctype: "Mtrh Forms Repository",
+        docname: me.parentId,
+        on_success(file_doc) {      
+          const { file_url, filename } = file_doc;
+          me.updateValue(file_url)
         },
-        parent: this.$refs["doctype"],
-        render_input: true,
       });
-      customer_field.toggle_label(false);
-      customer_field.$input.val(me.value);
-      $("#modal-body")
-        .find(".input-max-width")
-        .removeClass("input-max-width");
-    },
+
+    }
   },
 };
 </script>

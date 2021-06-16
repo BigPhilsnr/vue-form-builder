@@ -1,6 +1,5 @@
  <template>
  <div>
-     {{ this.valueContainer }}
 <div :class="control.additionalFieldClass" v-text="control.text">
     </div>
  </div>

@@ -31,7 +31,7 @@ export default {
   watch: {
     value(val) {
       if (!val || !val.length) {
-        this.linkControl.$input.val("test ");
+        this.linkControl.$input.val(" ");
       }else{
         this.linkControl.$input.val(val);
       }
